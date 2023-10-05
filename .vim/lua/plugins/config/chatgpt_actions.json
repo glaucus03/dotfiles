@@ -1,0 +1,15 @@
+{
+  "add_comment": {
+    "type": "completion",
+    "opts": {
+      "template": "Complete the following code written in {{lang}}. Add a comment summarizing the processing below the current cursor line.",
+      "strategy": "append",
+      "params": { 
+        "model": "gpt-3.5-turbo", 
+        "stop": [
+          "```" 
+        ]
+      }
+    }
+  }
+}

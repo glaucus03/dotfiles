@@ -1,0 +1,18 @@
+{
+    "explorer.icon.enableNerdfont": true,
+    "explorer.previewAction.onHover": false,
+    "explorer.file.cdCommand":"cd",
+    "explorer.autoExpandOptions":["uncompact","uncompact"],
+    "explorer.buffer.showHiddenBuffers":true,
+    "explorer.file.showHiddenFiles":true,
+    "explorer.keyMappings.global": {
+        "v": "open:vsplit"
+    },
+    "jedi": {
+        "enable":true,
+        "startupMessage": true,
+        "executable.command":"jedi-language-server"
+    },
+    "eslint.filetypes": ["javascript", "vue"],
+    "snippets.ultisnips.pythonPrompt": false
+}
