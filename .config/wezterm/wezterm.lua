@@ -111,14 +111,13 @@ return {
       -- The color of the strip that goes along the top of the window
       -- 
       -- (does not apply when fancy tab bar is in use)
-      background = '#0b0022',
       inactive_tab_edge = '#575757',
       -- The active tab is the one that has focus in the window
       active_tab = {
         -- The color of the background area for the tab
-        bg_color = '#e6e6e6',
+        bg_color = '#3b7070',
         -- The color of the text for the tab
-        fg_color = '#333333',
+        fg_color = '#dcffff',
 
         -- Specify whether you want "Half", "Normal" or "Bold" intensity for the
         -- label shown for this tab.
@@ -141,8 +140,8 @@ return {
 
       -- Inactive tabs are the tabs that do not have focus
       inactive_tab = {
-        bg_color = '#808080',
-        fg_color = '#4d4d4d',
+        bg_color = '#5c5c5c',
+        fg_color = '#3a3939',
 
         -- The same options that were listed under the `active_tab` section above
         -- can also be used for `inactive_tab`.
