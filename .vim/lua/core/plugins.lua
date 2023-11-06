@@ -15,3 +15,9 @@ vim.opt.rtp:prepend(lazypath)
 plugins = require('plugins.lazy_plugins')
 
 require('lazy').setup(plugins)
+
+-- setup screenshot
+local api = vim.api
+
+require('screenshot').setup()
+api.nvim_set_keymap('i', '<c-s>', "<esc>:lua require('screenshot').take_and_insert()<CR>", { noremap = true })
