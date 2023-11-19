@@ -169,12 +169,30 @@ return {
     end,
   },
   -- lsp
+  -- {
+  --   'neoclide/coc.nvim',
+  --   config = function()
+  --     require('plugins.config.coc-nvim')
+  --   end,
+  --   branch = "release",
+  -- },
   {
-    'neoclide/coc.nvim',
+    "williamboman/mason.nvim",
+    build = ":MasonUpdate",
+    opts = {},
+  },
+  {
+    "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      "neovim/nvim-lspconfig",
+      "jose-elias-alvarez/null-ls.nvim",
+    },
     config = function()
-      require('plugins.config.coc-nvim')
+      require("plugins.config.LSP-config") -- require your null-ls config here (example below)
     end,
-    branch = "release",
   },
   -- cmp
   {
