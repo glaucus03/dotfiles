@@ -116,10 +116,6 @@ require('nvim-tree').setup {
   view = {
     width = 40,
     side = 'left',
-    mappings = {
-      custom_only = false,
-      list = {}
-    }
   },
   renderer = {
     highlight_git = true,
