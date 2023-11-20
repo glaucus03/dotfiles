@@ -40,7 +40,7 @@ cmp.setup({
     { name = 'nvim_lua' },
     { name = 'vsnip' },
     { name = 'calc' },
-    { name = 'emoji'}
+    { name = 'emoji' }
   }),
 
   experimental = {
@@ -57,11 +57,16 @@ cmp.setup.cmdline({ '/', '?' }, {
   })
 })
 cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(),
+  mapping = cmp.mapping.preset.cmdline({
+    ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(),{'i', 'c'}),
+    ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(),{'i', 'c'}),
+    ['<Enter>'] = cmp.mapping(cmp.mapping.abort(),{'i', 'c'}),
+    ['<C-y>'] = cmp.mapping(cmp.mapping.confirm({ select = true }),{'i', 'c'}),
+  }
+  ),
   sources = cmp.config.sources({
     { name = 'path' }
   }, {
     { name = 'cmdline', keyword_length = 2 }
   })
 })
-
