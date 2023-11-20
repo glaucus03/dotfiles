@@ -6,6 +6,7 @@ return {
       require('plugins.config.nightfox')
     end,
   },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   -- {
   --   'christianchiarulli/nvcode-color-schemes.vim',
   --   config = function()
@@ -61,9 +62,9 @@ return {
   },
   {
     "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = { 
+    dependencies = {
       "nvim-telescope/telescope.nvim",
-      "nvim-lua/plenary.nvim" 
+      "nvim-lua/plenary.nvim"
     },
     config = function()
       require('plugins.config.telescope-file-browser')
@@ -235,6 +236,10 @@ return {
     event = 'InsertEnter'
   },
   {
+    'hrsh7th/cmp-emoji',
+    event = 'InsertEnter'
+  },
+  {
     'onsails/lspkind.nvim',
     event = 'InsertEnter'
   },
@@ -272,10 +277,10 @@ return {
 
   -- dev
   {
-      "iamcco/markdown-preview.nvim",
-      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-      ft = { "markdown" },
-      build = function() vim.fn["mkdp#util#install"]() end,
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function() vim.fn["mkdp#util#install"]() end,
   },
   {
     'akinsho/flutter-tools.nvim',

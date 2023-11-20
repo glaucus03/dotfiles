@@ -1,32 +1,47 @@
 local function selectionCount()
-    local mode = vim.fn.mode()
-    local start_line, end_line, start_pos, end_pos
+  local mode = vim.fn.mode()
+  local start_line, end_line, start_pos, end_pos
 
-    -- 選択モードでない場合には無効
-    if not (mode:find("[vV\22]") ~= nil) then return "" end
-    start_line = vim.fn.line("v")
-    end_line = vim.fn.line(".")
+  -- 選択モードでない場合には無効
+  if not (mode:find("[vV\22]") ~= nil) then return "" end
+  start_line = vim.fn.line("v")
+  end_line = vim.fn.line(".")
 
-    if mode == 'V' then
-        -- 行選択モードの場合は、各行全体をカウントする
-        start_pos = 1
-        end_pos = vim.fn.strlen(vim.fn.getline(end_line)) + 1
+  if mode == 'V' then
+    -- 行選択モードの場合は、各行全体をカウントする
+    start_pos = 1
+    end_pos = vim.fn.strlen(vim.fn.getline(end_line)) + 1
+  else
+    start_pos = vim.fn.col("v")
+    end_pos = vim.fn.col(".")
+  end
+
+  local chars = 0
+  for i = start_line, end_line do
+    local line = vim.fn.getline(i)
+    local line_len = vim.fn.strlen(line)
+    local s_pos = (i == start_line) and start_pos or 1
+    local e_pos = (i == end_line) and end_pos or line_len + 1
+    chars = chars + vim.fn.strchars(line:sub(s_pos, e_pos - 1))
+  end
+
+  local lines = math.abs(end_line - start_line) + 1
+  return tostring(lines) .. " lines, " .. tostring(chars) .. " characters"
+end
+local function lsp_names()
+  local clients = {}
+  for _, client in ipairs(vim.lsp.get_active_clients { bufnr = 0 }) do
+    if client.name == 'null-ls' then
+      local sources = {}
+      for _, source in ipairs(require('null-ls.sources').get_available(vim.bo.filetype)) do
+        table.insert(sources, source.name)
+      end
+      table.insert(clients, 'null-ls(' .. table.concat(sources, ', ') .. ')')
     else
-        start_pos = vim.fn.col("v")
-        end_pos = vim.fn.col(".")
+      table.insert(clients, client.name)
     end
-
-    local chars = 0
-    for i = start_line, end_line do
-        local line = vim.fn.getline(i)
-        local line_len = vim.fn.strlen(line)
-        local s_pos = (i == start_line) and start_pos or 1
-        local e_pos = (i == end_line) and end_pos or line_len + 1
-        chars = chars + vim.fn.strchars(line:sub(s_pos, e_pos - 1))
-    end
-
-    local lines = math.abs(end_line - start_line) + 1
-    return tostring(lines) .. " lines, " .. tostring(chars) .. " characters"
+  end
+  return ' ' .. table.concat(clients, ', ')
 end
 require('lualine').setup {
   options = {
@@ -55,12 +70,12 @@ require('lualine').setup {
       }
     },
     lualine_x = {
-      {'searchcount'},
-      {selectionCount},
+      { 'searchcount' },
+      { selectionCount },
       {
         'diagnostics',
         sources = {
-          -- 'nvim_diagnostic', 
+          -- 'nvim_diagnostic',
           'nvim_lsp',
         },
 
@@ -77,6 +92,7 @@ require('lualine').setup {
         update_in_insert = false,
         always_visible = false,
       },
+      { lsp_names }
     },
     lualine_y = { 'filetype', 'encoding' },
     lualine_z = {

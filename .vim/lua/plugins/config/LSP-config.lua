@@ -1,3 +1,5 @@
+local lspconfig = require('lspconfig')
+
 require('mason-lspconfig').setup({
   lspconfig = {
     cmd = { 'mason', 'lsp' },
@@ -7,7 +9,7 @@ require('mason-lspconfig').setup({
 })
 require('mason-lspconfig').setup_handlers {
   function(server_name)
-    require('lspconfig')[server_name].setup {
+    lspconfig[server_name].setup {
       settings = {
         Lua = {
           diagnostics = {
@@ -17,6 +19,8 @@ require('mason-lspconfig').setup_handlers {
       },
     }
   end,
+  lspconfig.dartls.setup({
+  })
 }
 
 -- Use LspAttach autocommand to only map the following keys
@@ -29,7 +33,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local opts = { noremap= true, silent=true, buffer = ev.buf }
+    local opts = { noremap = true, silent = true, buffer = ev.buf }
     vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, opts)
     vim.keymap.set('n', '<leader>ge', vim.diagnostic.open_float, opts)
     vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, opts)
@@ -48,5 +52,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 
 require("mason-null-ls").setup({
-    handlers = {},
+  handlers = {},
 })
