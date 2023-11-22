@@ -12,6 +12,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.g["denops#deno"] = vim.fn.getenv('DENO_PATH')
+
 plugins = require('plugins.lazy_plugins')
 
 require('lazy').setup(plugins)

@@ -40,7 +40,8 @@ cmp.setup({
     { name = 'nvim_lua' },
     { name = 'vsnip' },
     { name = 'calc' },
-    { name = 'emoji' }
+    { name = 'emoji' },
+    { name = 'skkeleton'},
   }),
 
   experimental = {

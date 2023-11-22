@@ -255,6 +255,26 @@ return {
     'rafamadriz/friendly-snippets',
     event = 'InsertEnter'
   },
+  {
+    'rinx/cmp-skkeleton',
+    dependencies = {
+      {
+        'vim-skk/skkeleton',
+        dependencies = {
+          'vim-denops/denops.vim',
+        },
+        config = function()
+          require('plugins.config.skkeleton')
+        end,
+      }
+    }
+  },
+  {
+    'delphinus/skkeleton_indicator.nvim',
+    config = function()
+      require'skkeleton_indicator'.setup()
+    end
+  },
   -- debugger
   -- {
   --   'mfussenegger/nvim-dap',
