@@ -1,0 +1,39 @@
+
+# ==== Commit ====
+# <prefix>(<scope>): <subject><emojis>
+# 上記のような形式のコミットメッセージとします。
+# prefix, emojisについては、ドキュメント記載の形式に従ってください。
+# scopeについては任意としますが、変更対象を簡易に記載するものとします
+# subjectについては、変更内容を完結に記載してください。
+#
+# 以下がコミットメッセージの例です。
+# fix(class): fix illegal exception:bug:
+#
+# ==== Prefix ====
+# fix: バグや不具合の修正
+# feat: 新機能や新規機能の追加
+# docs: ドキュメントの更新や改善
+# style: コードのフォーマット、セミコロンの追加、UIの変更
+# refactor: パフォーマンスの向上なしでのコードの再構築や改善
+# test: テストの追加、テストシステムの改善
+# perf: パフォーマンスの改善
+# chore: ビルドプロセスの変更や改善
+#
+# ==== Emojis ====
+# :ambulance:  🚑致命的なバグ修正(fix)
+# :bug:  🐛バグ修正(fix)
+# :+1: 👍機能改善・機能修正(fix)
+# :cop: 👮セキュリティ関連の修正(fix)
+# :tada: 🎉大きな機能追加(feat)
+# :sparkles: ✨部分的な機能追加(feat)
+# :up:   🆙依存パッケージ等のアップデート(feat)
+# :memo: 📝ドキュメント修正(docs)
+# :bulb: 💡ソースコードへのコメント追加や修正(docs)
+# :art: 🎨レイアウト関連の修正(style)
+# :lipstick: 💄Lintエラーの修正やコードスタイルの修正(style)
+# :recycle: ♻️リファクタリング(refactor)
+# :fire: 🔥コードやファイルの削除(refactor)
+# :green_heart: 💚テストやCIの修正・改善(test)
+# :rocket: 🚀パフォーマンス改善(perf)
+# :wrench: 🔧設定ファイルの修正(chore)
+# :building_construction: 🏗️アーキテクチャの変更(chore)
