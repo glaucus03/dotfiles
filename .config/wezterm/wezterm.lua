@@ -1,8 +1,9 @@
 local wezterm = require 'wezterm';
 
 return {
+  default_prog = { "/bin/bash", "-l" },
   font = wezterm.font("Fira Code"),
-  use_ime = true, 
+  use_ime = true,
   xim_im_name = 'fcitx5',
   font_size = 12.0,
   color_scheme = "nightfox", -- find your favorite theme, https://wezfurlong.org/wezterm/colorschemes/index.html
@@ -23,93 +24,93 @@ return {
   -- keymap
   keys = {
     {
-        key = 't',
-        mods = 'CTRL|SHIFT',
-        action = wezterm.action.SpawnCommandInNewTab {
-            domain = 'CurrentPaneDomain'
-        },
+      key = 't',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.SpawnCommandInNewTab {
+        domain = 'CurrentPaneDomain'
+      },
     },
     {
-        key = 'w',
-        mods = 'CTRL|SHIFT',
-        action = wezterm.action.CloseCurrentTab {
-            confirm = false
-        },
+      key = 'w',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.CloseCurrentTab {
+        confirm = false
+      },
     },
     {
-        key = 'q',
-        mods = 'CTRL|SHIFT',
-        action = wezterm.action.CloseCurrentPane {
-            confirm = false
-        }
+      key = 'q',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.CloseCurrentPane {
+        confirm = false
+      }
     },
     {
-        key = 'j',
-        mods = 'CTRL|SHIFT',
-        action = wezterm.action.SplitVertical {
-            domain = 'CurrentPaneDomain'
-        }
+      key = 'j',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.SplitVertical {
+        domain = 'CurrentPaneDomain'
+      }
     },
     {
-        key = 'l',
-        mods = 'CTRL|SHIFT',
-        action = wezterm.action.SplitHorizontal {
-            domain = 'CurrentPaneDomain'
-        }
+      key = 'l',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.SplitHorizontal {
+        domain = 'CurrentPaneDomain'
+      }
     },
     {
-        key = 's',
-        mods = 'CTRL|SHIFT',
-        action = wezterm.action.PaneSelect {
-            mode = 'Activate'
-        }
+      key = 's',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.PaneSelect {
+        mode = 'Activate'
+      }
     },
     {
-        key = '{',
-        mods = 'CTRL|SHIFT',
-        action = wezterm.action.ActivateTabRelative(-1)
+      key = '{',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.ActivateTabRelative(-1)
     },
     {
-        key = '}',
-        mods = 'CTRL|SHIFT',
-        action = wezterm.action.ActivateTabRelative(1)
+      key = '}',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.ActivateTabRelative(1)
     },
     {
-        key = 'r',
-        mods = 'CTRL|SHIFT',
-        action = wezterm.action.PromptInputLine {
-          description = "Enter new name for tab",
-          action = wezterm.action_callback(function(window, pane, line)
-            if line then
-              window:active_tab():set_title(line)
-            end
-          end),
-        }
+      key = 'r',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.PromptInputLine {
+        description = "Enter new name for tab",
+        action = wezterm.action_callback(function(window, pane, line)
+          if line then
+            window:active_tab():set_title(line)
+          end
+        end),
+      }
     },
     -- TODO: Copy clipboard text, Google search, translate, etc.
     {
-        key = 'c',
-        mods = 'CTRL|SHIFT',
-        action = wezterm.action_callback(function(window, pane)
-                local word = window:get_selection_escapes_for_pane(pane)
-                window:copy_to_clipboard(word)
-            end) 
+      key = 'c',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action_callback(function(window, pane)
+        local word = window:get_selection_escapes_for_pane(pane)
+        window:copy_to_clipboard(word)
+      end)
     },
     {
-        key = 'g',
-        mods = 'CTRL|SHIFT',
-        action = wezterm.action_callback(function(window, pane)
-                local word = window:get_selection_escapes_for_pane(pane)
-                local search_text, idx = string.gsub(word, ' ','+')
-                window:copy_to_clipboard(word)
-                os.execute("open https://google.com/search?q=" .. 'a')
-            end) 
+      key = 'g',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action_callback(function(window, pane)
+        local word = window:get_selection_escapes_for_pane(pane)
+        local search_text, idx = string.gsub(word, ' ', '+')
+        window:copy_to_clipboard(word)
+        os.execute("open https://google.com/search?q=" .. 'a')
+      end)
     }
   },
   colors = {
     tab_bar = {
       -- The color of the strip that goes along the top of the window
-      -- 
+      --
       -- (does not apply when fancy tab bar is in use)
       inactive_tab_edge = '#575757',
       -- The active tab is the one that has focus in the window
