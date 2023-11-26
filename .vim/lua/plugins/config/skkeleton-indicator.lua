@@ -1,7 +1,9 @@
-function EnterInsertAndSkkeletonWithHira() vim.api.nvim_command('startinsert')
+function EnterInsertAndSkkeletonWithHira()
+  vim.api.nvim_command('startinsert')
   local keys = vim.api.nvim_replace_termcodes('<Plug>(skkeleton-toggle)', true, false, true)
   vim.api.nvim_feedkeys(keys, 'n', false)
 end
+
 vim.api.nvim_set_hl(0, "SkkeletonIndicatorEiji",
   { fg = "#88c0d0", bg = "#2e3440", bold = true })
 vim.api.nvim_set_hl(0, "SkkeletonIndicatorHira",
@@ -24,4 +26,5 @@ require 'skkeleton_indicator'.setup(
     alwaysShown = true
   }
 )
+
 vim.api.nvim_set_keymap('n', 'K', ':lua EnterInsertAndSkkeletonWithHira()<CR>', { noremap = true })
