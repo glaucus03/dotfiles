@@ -56,9 +56,13 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
-    config = function()
-      require('plugins.config.telescope')
-    end,
+    -- config = function()
+    -- end,
+  },
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build =
+    'make'
   },
   {
     "nvim-telescope/telescope-file-browser.nvim",
@@ -67,7 +71,7 @@ return {
       "nvim-lua/plenary.nvim"
     },
     config = function()
-      require('plugins.config.telescope-file-browser')
+      require('plugins.config.telescope')
     end,
   },
   -- code layout
@@ -272,9 +276,10 @@ return {
   {
     'delphinus/skkeleton_indicator.nvim',
     config = function()
-      require'skkeleton_indicator'.setup()
+      require('plugins.config.skkeleton-indicator')
     end
   },
+  
   -- debugger
   -- {
   --   'mfussenegger/nvim-dap',
