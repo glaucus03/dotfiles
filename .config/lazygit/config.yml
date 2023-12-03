@@ -40,6 +40,9 @@ customCommands:
           - name: "chore"
             description: "ビルドプロセスの変更や改善"
             value: "chore"
+          - name: "wip"
+            description: "作業中"
+            value: "wip"
       - type: "input"
         title: "(Optional) Enter the scope"
         key: "Scope"
@@ -106,6 +109,9 @@ customCommands:
           - name: ':building_construction:'
             description: '(chore)🏗️アーキテクチャの修正'
             value: ':building_construction:'
+          - name: ':construction:'
+            description: '(wip)🚧作業中'
+            value: ':construction:'
       - type: "confirm"
         title: "Commit"
         body: "Commit with the message '{{.Form.Type}}{{.Form.Scope}}: {{.Form.Message}}{{.Form.Emoji}}'. Is this okay?"
