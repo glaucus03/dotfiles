@@ -25,6 +25,8 @@ wk.register({
     name = "NvimTree",
     ["<c-e>"] = { "<cmd>NvimTreeOpen | NvimTreeFindFile<CR>", "NvimTreeFindFile", mode = { "n" } },
     ["<c-q>"] = { "<cmd>NvimTreeClose<CR>", "NvimTreeClose", mode = { "n" } },
+    ["<c-r>"] = { "<cmd>NvimTreeRefresh<CR>", "NvimTreeRefresh", mode = { "n" } },
+    ["<c-f>"] = { "<cmd>NvimTreeFindFile<CR>", "NvimTreeFindFile", mode = { "n" } },
   }
 })
 
