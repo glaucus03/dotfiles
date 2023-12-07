@@ -2,3 +2,5 @@
 .vim/log/*
 .vim/undodir/*
 .vim/sessions/*
+.config/lazygit/state.yml
+.vim/NvimTree_1
