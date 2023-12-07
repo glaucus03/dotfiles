@@ -45,6 +45,7 @@ wk.register({
     name = "Git",
     s = { "<cmd>lua require('telescope.builtin').git_status()<CR>", 'git status files', mode = { 'n' } },
   }
+
 }, { prefix = "<leader>" })
 
 -- wk.register({
@@ -72,18 +73,18 @@ wk.register({
 wk.register({
   l = {
     name = "LSP",
-    k = { "<cmd>lua vim.lsp.buf.hover()<CR>", "vim.lsp.buf hover", mode = { "n", "v" } },
-    f = { "<cmd>lua vim.lsp.buf.format()<CR>", "vim.lsp.buf formatting", mode = { "n", "v" } },
-    r = { "<cmd>lua vim.lsp.buf.references()<CR>", "vim.lsp.buf references", mode = { "n", "v" } },
-    d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "vim.lsp.buf definition", mode = { "n", "v" } },
-    D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "vim.lsp.buf declaration", mode = { "n", "v" } },
-    i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "vim.lsp.buf implementation", mode = { "n", "v" } },
-    t = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "vim.lsp.buf type_definition", mode = { "n", "v" } },
-    R = { "<cmd>lua vim.lsp.buf.rename()<CR>", "vim.lsp.buf rename", mode = { "n", "v" } },
-    a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "vim.lsp.buf code_action", mode = { "n", "v" } },
-    o = { "<cmd>lua vim.diagnostic.open_float()<CR>", "vim.diagnostic open_float", mode = { "n", "v" } },
-    ["]"] = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "vim.diagnostic goto_next", mode = { "n", "v" } },
-    ["["] = { "<cmd>lua vim.diagnostic.goto_previous()<CR>", "vim.diagnostic goto_previous", mode = { "n", "v" } },
+    k = { "<cmd>lua vim.lsp.buf.hover()<CR>", "vim.lsp.buf.hover()", mode = { "n", "v" } },
+    f = { "<cmd>lua vim.lsp.buf.format()<CR>", "vim.lsp.buf.format()", mode = { "n", "v" } },
+    r = { "<cmd>lua vim.lsp.buf.references()<CR>", "vim.lsp.buf.references()", mode = { "n", "v" } },
+    d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "vim.lsp.buf.definition()", mode = { "n", "v" } },
+    D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "vim.lsp.buf.declaration()", mode = { "n", "v" } },
+    i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "vim.lsp.buf.implementation()", mode = { "n", "v" } },
+    t = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "vim.lsp.buf.type_definition()", mode = { "n", "v" } },
+    R = { "<cmd>lua vim.lsp.buf.rename()<CR>", "vim.lsp.buf.rename()", mode = { "n", "v" } },
+    a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "vim.lsp.buf.code_action()", mode = { "n", "v" } },
+    o = { "<cmd>lua vim.diagnostic.open_float()<CR>", "vim.diagnostic.open_float()", mode = { "n", "v" } },
+    ["]"] = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "vim.diagnostic.goto_next()", mode = { "n", "v" } },
+    ["["] = { "<cmd>lua vim.diagnostic.goto_previous()<CR>", "vim.diagnostic.goto_previous()", mode = { "n", "v" } },
 
   },
 }, { prefix = "<leader>" })
