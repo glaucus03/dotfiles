@@ -199,6 +199,13 @@ return {
       require("plugins.config.LSP-config") -- require your null-ls config here (example below)
     end,
   },
+  -- dap
+  {
+    "mfussenegger/nvim-dap",
+    config = function()
+      require("plugins.config.nvim-dap")
+    end,
+  },
   -- cmp
   {
     'hrsh7th/nvim-cmp',
@@ -279,7 +286,7 @@ return {
       require('plugins.config.skkeleton-indicator')
     end
   },
-  
+
   -- debugger
   -- {
   --   'mfussenegger/nvim-dap',
