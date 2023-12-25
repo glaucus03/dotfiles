@@ -201,6 +201,15 @@ return {
   },
   -- dap
   {
+    "rcarriga/nvim-dap-ui",
+    dependencies = {
+      "mfussenegger/nvim-dap"
+    },
+    config = function()
+      require("plugins.config.nvim-dap")
+    end,
+  },
+  {
     "mfussenegger/nvim-dap",
     config = function()
       require("plugins.config.nvim-dap")
