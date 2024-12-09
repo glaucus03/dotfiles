@@ -1,3 +1,4 @@
+ln -s ~/.config/.vim ~/.config/nvim
 ln -sf $(pwd)/.config/.vim ~/.config/nvim
 ln -sf $(pwd)/.config/wezterm ~/.config/wezterm
 ln -sf $(pwd)/.config/kitty ~/.config/kitty
