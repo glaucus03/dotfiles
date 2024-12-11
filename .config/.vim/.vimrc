@@ -81,7 +81,6 @@ highlight EndOfBuffer ctermbg=none
 " set key mapping
 let mapleader = "\<space>"
 " nnoremap <c-a> gg0vG$
-nnoremap <c-c> :noh<cr><esc>
 " set jj to esc 
 inoremap <silent> jj <ESC>
 " set っｊ to esc

@@ -7,7 +7,6 @@ api.nvim_set_keymap('n', '<c-h>', '<c-w><c-h>', { noremap = true })
 api.nvim_set_keymap('n', '<c-j>', '<c-w><c-j>', { noremap = true })
 api.nvim_set_keymap('n', '<c-k>', '<c-w><c-k>', { noremap = true })
 api.nvim_set_keymap('n', '<c-l>', '<c-w><c-l>', { noremap = true })
-api.nvim_set_keymap('n', '<c-c>', ':noh<cr><esc>', { noremap = true })
 api.nvim_set_keymap('n', ';', ':', { noremap = true})
 
 api.nvim_set_keymap('t', '<c-q>', '<c-\\><c-n><c-w>q', {noremap=true})
