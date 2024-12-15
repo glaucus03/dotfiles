@@ -45,14 +45,14 @@ return {
       }
     },
     {
-      key = 'j',
+      key = '-',
       mods = 'CTRL|SHIFT',
       action = wezterm.action.SplitVertical {
         domain = 'CurrentPaneDomain'
       }
     },
     {
-      key = 'l',
+      key = "'",
       mods = 'CTRL|SHIFT',
       action = wezterm.action.SplitHorizontal {
         domain = 'CurrentPaneDomain'
@@ -66,12 +66,12 @@ return {
       }
     },
     {
-      key = '{',
+      key = '.',
       mods = 'CTRL|SHIFT',
       action = wezterm.action.ActivateTabRelative(-1)
     },
     {
-      key = '}',
+      key = '/',
       mods = 'CTRL|SHIFT',
       action = wezterm.action.ActivateTabRelative(1)
     },
