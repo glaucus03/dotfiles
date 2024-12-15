@@ -45,14 +45,14 @@ return {
       }
     },
     {
-      key = '-',
+      key = '_',
       mods = 'CTRL|SHIFT',
       action = wezterm.action.SplitVertical {
         domain = 'CurrentPaneDomain'
       }
     },
     {
-      key = "'",
+      key = '"',
       mods = 'CTRL|SHIFT',
       action = wezterm.action.SplitHorizontal {
         domain = 'CurrentPaneDomain'
@@ -66,12 +66,12 @@ return {
       }
     },
     {
-      key = '.',
+      key = '<',
       mods = 'CTRL|SHIFT',
       action = wezterm.action.ActivateTabRelative(-1)
     },
     {
-      key = '/',
+      key = '>',
       mods = 'CTRL|SHIFT',
       action = wezterm.action.ActivateTabRelative(1)
     },
@@ -103,7 +103,7 @@ return {
         local word = window:get_selection_escapes_for_pane(pane)
         local search_text, idx = string.gsub(word, ' ', '+')
         window:copy_to_clipboard(word)
-        os.execute("open https://google.com/search?q=" .. 'a')
+        os.execute("open https://google.com/search?q=" .. search_text)
       end)
     }
   },
