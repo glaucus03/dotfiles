@@ -32,7 +32,7 @@ local function selectionCount()
 end
 
 local function lsp_clients()
-	local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+	local clients = vim.lsp.get_clients({ bufnr = 0 })
 	if next(clients) == nil then
 		return " no lspclients"
 	end
@@ -40,7 +40,7 @@ local function lsp_clients()
 	for _, client in pairs(clients) do
 		table.insert(client_names, client.name)
 	end
-	return table.concat(client_names, ", ")
+	return "LSP:" .. table.concat(client_names, ", ")
 end
 
 -- local function lsp_names()
