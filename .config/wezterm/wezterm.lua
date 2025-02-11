@@ -2,10 +2,10 @@ local wezterm = require 'wezterm';
 
 return {
   default_prog = { "/bin/bash", "-l" },
-  font = wezterm.font("Fira Code"),
+  font = wezterm.font("Cica"),
   use_ime = true,
   xim_im_name = 'fcitx5',
-  font_size = 12.0,
+  font_size = 14.0,
   color_scheme = "nightfox", -- find your favorite theme, https://wezfurlong.org/wezterm/colorschemes/index.html
   hide_tab_bar_if_only_one_tab = false,
   adjust_window_size_when_changing_font_size = false,

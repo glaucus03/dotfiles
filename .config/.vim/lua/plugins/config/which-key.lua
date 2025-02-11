@@ -2,6 +2,27 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 local wk = require("which-key")
 
+-- default keymap
+wk.add({
+  {
+    "<C-a>",
+    function()
+      require("dial.map").manipulate("increment", "normal")
+    end
+    ,
+    desc = "Increment"
+  },
+  {
+    "<C-x>",
+    function()
+      require("dial.map").manipulate("decrement", "normal")
+    end
+    ,
+    desc = "Decrement"
+  },
+})
+
+-- leader keymap
 wk.add({
   { "<leader>e",  group = "NvimTree" },
   { "<leader>ee", "<cmd>NvimTreeOpen | NvimTreeFindFile<CR>", desc = "NvimTreeFindFile" },
@@ -13,17 +34,75 @@ wk.add({
 wk.add(
   {
     { "<leader>f",  group = "telescope" },
-    { "<leader>fF", "<cmd>Telescope file_browser<CR>",                        desc = "file browser" },
-    { "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<CR>",    desc = "find buffers" },
-    { "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<CR>", desc = "find files" },
-    { "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<CR>",  desc = "live grep" },
+    { "<leader>fF", "<cmd>Telescope file_browser<CR>",                                   desc = "file browser" },
+    { "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<CR>",               desc = "find buffers" },
+    { "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<CR>",            desc = "find files" },
+    { "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<CR>",             desc = "live grep" },
+    { "<leader>fy", "<cmd>lua require('neoclip.fzf')({'a', 'star', 'plus', 'unnmaed'})<CR>", desc = "yank" },
+
   }
 )
+
+wk.add({
+  { "<leader>m",  group = "Move Commands" },
+  { "<leader>mh", "<cmd>HopWord<CR>",     desc = "HopWord" },
+})
+
+wk.add({
+  { "<leader>c", group = "Convert Commands" },
+  {
+    mode = { "n", "v" },
+
+    {
+      "<leader>cgi",
+      function()
+        require("dial.map").manipulate("increment", "gnormal")
+      end
+      ,
+      desc = "Increment"
+    },
+    {
+      "<leader>cgd",
+      function()
+        require("dial.map").manipulate("decrement", "gnormal")
+      end
+      ,
+      desc = "Decrement"
+    },
+  },
+})
+
+wk.add({
+  { "<leader>s", group = "Image Commands" },
+  {
+    mode = { "v" },
+    {
+      "<leader>sc",
+      function()
+        require("nvim-silicon").clip()
+      end
+      ,
+      desc = "Silicon save clipboard"
+    },
+    {
+      "<leader>sf",
+      function()
+        require("nvim-silicon").file()
+      end
+      ,
+      desc = "Silicon save file"
+    },
+  },
+})
 
 wk.add(
   {
     { "<leader>g",  group = "Git" },
+    { "<leader>gg", "<cmd>LazyGit<CR>", desc = "open lazygit" },
     { "<leader>gs", "<cmd>lua require('telescope.builtin').git_status()<CR>", desc = "git status files" },
+    { "<leader>gb", "<cmd>BlamerToggle<CR>", desc = "show git blame" },
+    { "<leader>gvo", "<cmd>DiffviewOpen<CR>", desc = "show git diff" },
+    { "<leader>gvo", "<cmd>DiffviewClose<CR>", desc = "close git diff" },
   }
 )
 wk.add({
