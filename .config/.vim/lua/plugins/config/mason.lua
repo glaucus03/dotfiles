@@ -41,10 +41,6 @@ require("mason-lspconfig").setup {
 			"gopls",
 			"html",
 			"jsonls",
-			"tsserver",
-			"marksman",
-			"nimls",
-			"pylsp",
 			"jdtls",
 	}
 }

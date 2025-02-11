@@ -6,7 +6,7 @@ return {
       require('plugins.config.nightfox')
     end,
   },
-  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
+  { 'catppuccin/nvim',              name = 'catppuccin', priority = 1000 },
   -- windows management
   {
     'simeji/winresizer',
@@ -179,7 +179,64 @@ return {
     },
   },
   { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
-  { "nvimtools/none-ls.nvim", lazy = true },
+  {
+    "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      'nvimtools/none-ls.nvim',
+    },
+    config = function()
+      local null_ls = require("null-ls")
+      local home = vim.fn.expand("$HOME")
+      null_ls.setup({
+        fallback_severity = vim.diagnostic.severity.HINT,
+        sources = {
+          null_ls.builtins.formatting.google_java_format,
+          null_ls.builtins.diagnostics.checkstyle.with({
+            diagnostics_postprocess = function(diagnostic)
+              diagnostic.severity = vim.diagnostic.severity.HINT
+            end,
+            extra_args = { "-c", home .. "/dev/lib/google_checks.xml" },
+          }),
+        },
+        -- debug = true
+      })
+      require("mason-null-ls").setup({
+        handlers = {},
+      })
+    end,
+  },
+  -- {
+  --   "nvimtools/none-ls.nvim",
+  --   dependencies = {
+  --   "jay-babu/mason-null-ls.nvim",
+  --     "gbprod/none-ls-shellcheck.nvim", -- shellcheck
+  --     "nvimtools/none-ls-extras.nvim",  -- eslint_d
+  --   },
+  --   config = function()
+  --     -- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md
+  --     local null_ls = require("null-ls")
+  --     local home = vim.fn.expand("$HOME")
+  --     null_ls.setup({
+  --       fallback_severity = vim.diagnostic.severity.HINT,
+  --       sources = {
+  --         null_ls.builtins.formatting.google_java_format,
+  --         null_ls.builtins.diagnostics.checkstyle.with({
+  --           diagnostics_postprocess = function(diagnostic)
+  --             diagnostic.severity = vim.diagnostic.severity.HINT
+  --           end,
+  --           extra_args = { "-c", home .. "/dev/lib/google_checks.xml" },
+  --         }),
+  --       },
+  --       -- debug = true
+  --     })
+  --     require('mason-null-ls').setup({
+  --       automatic_setup = true,
+  --       handlers = {},
+  --     })
+  --   end
+  -- },
 
   -- dap
   {
@@ -274,7 +331,7 @@ return {
       end,
       to_clipboard = true,
       font = 'Cica',
-      background='#fff0',
+      background = '#fff0',
       pad_horiz = 50,
       pad_vert = 40,
     }
