@@ -23,30 +23,7 @@ wk.add({
 })
 
 -- leader keymap
-wk.add({
-  { "<leader>e",  group = "NvimTree" },
-  { "<leader>ee", "<cmd>NvimTreeOpen | NvimTreeFindFile<CR>", desc = "NvimTreeFindFile" },
-  { "<leader>ef", "<cmd>NvimTreeFindFile<CR>",                desc = "NvimTreeFindFile" },
-  { "<leader>eq", "<cmd>NvimTreeClose<CR>",                   desc = "NvimTreeClose" },
-  { "<leader>er", "<cmd>NvimTreeRefresh<CR>",                 desc = "NvimTreeRefresh" },
-})
 
-wk.add(
-  {
-    { "<leader>f",  group = "telescope" },
-    { "<leader>fF", "<cmd>Telescope file_browser<CR>",                                   desc = "file browser" },
-    { "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<CR>",               desc = "find buffers" },
-    { "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<CR>",            desc = "find files" },
-    { "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<CR>",             desc = "live grep" },
-    { "<leader>fy", "<cmd>lua require('neoclip.fzf')({'a', 'star', 'plus', 'unnmaed'})<CR>", desc = "yank" },
-
-  }
-)
-
-wk.add({
-  { "<leader>m",  group = "Move Commands" },
-  { "<leader>mh", "<cmd>HopWord<CR>",     desc = "HopWord" },
-})
 
 wk.add({
   { "<leader>c", group = "Convert Commands" },
@@ -72,39 +49,7 @@ wk.add({
   },
 })
 
-wk.add({
-  { "<leader>s", group = "Image Commands" },
-  {
-    mode = { "v" },
-    {
-      "<leader>sc",
-      function()
-        require("nvim-silicon").clip()
-      end
-      ,
-      desc = "Silicon save clipboard"
-    },
-    {
-      "<leader>sf",
-      function()
-        require("nvim-silicon").file()
-      end
-      ,
-      desc = "Silicon save file"
-    },
-  },
-})
 
-wk.add(
-  {
-    { "<leader>g",  group = "Git" },
-    { "<leader>gg", "<cmd>LazyGit<CR>", desc = "open lazygit" },
-    { "<leader>gs", "<cmd>lua require('telescope.builtin').git_status()<CR>", desc = "git status files" },
-    { "<leader>gb", "<cmd>BlamerToggle<CR>", desc = "show git blame" },
-    { "<leader>gvo", "<cmd>DiffviewOpen<CR>", desc = "show git diff" },
-    { "<leader>gvo", "<cmd>DiffviewClose<CR>", desc = "close git diff" },
-  }
-)
 wk.add({
   { "<leader>l", group = "LSP" },
   {
@@ -124,3 +69,67 @@ wk.add({
   },
 }
 )
+
+if not vim.g.vscode then
+  wk.add({
+    { "<leader>e",  group = "NvimTree" },
+    { "<leader>ee", "<cmd>NvimTreeOpen | NvimTreeFindFile<CR>", desc = "NvimTreeFindFile" },
+    { "<leader>ef", "<cmd>NvimTreeFindFile<CR>",                desc = "NvimTreeFindFile" },
+    { "<leader>eq", "<cmd>NvimTreeClose<CR>",                   desc = "NvimTreeClose" },
+    { "<leader>er", "<cmd>NvimTreeRefresh<CR>",                 desc = "NvimTreeRefresh" },
+  })
+
+  wk.add(
+    {
+      { "<leader>f",  group = "telescope" },
+      { "<leader>fF", "<cmd>Telescope file_browser<CR>",                                       desc = "file browser" },
+      { "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<CR>",                   desc = "find buffers" },
+      { "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<CR>",                desc = "find files" },
+      { "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<CR>",                 desc = "live grep" },
+      { "<leader>fy", "<cmd>lua require('neoclip.fzf')({'a', 'star', 'plus', 'unnmaed'})<CR>", desc = "yank" },
+
+    }
+  )
+  wk.add(
+    {
+      { "<leader>g",   group = "Git" },
+      { "<leader>gg",  "<cmd>LazyGit<CR>",                                       desc = "open lazygit" },
+      { "<leader>gs",  "<cmd>lua require('telescope.builtin').git_status()<CR>", desc = "git status files" },
+      { "<leader>gb",  "<cmd>BlamerToggle<CR>",                                  desc = "show git blame" },
+      { "<leader>gvo", "<cmd>DiffviewOpen<CR>",                                  desc = "show git diff" },
+      { "<leader>gvo", "<cmd>DiffviewClose<CR>",                                 desc = "close git diff" },
+    }
+  )
+
+  wk.add({
+    { "<leader>s", group = "Image Commands" },
+    {
+      mode = { "v" },
+      {
+        "<leader>sc",
+        function()
+          require("nvim-silicon").clip()
+        end
+        ,
+        desc = "Silicon save clipboard"
+      },
+      {
+        "<leader>sf",
+        function()
+          require("nvim-silicon").file()
+        end
+        ,
+        desc = "Silicon save file"
+      },
+    },
+  })
+
+  wk.add({
+    { "<leader>m",  group = "Move Commands" },
+    { "<leader>mh", "<cmd>HopWord<CR>",     desc = "HopWord" },
+  })
+else
+  vim.keymap.set("n", "<leader>fb", "<Cmd>call VSCodeNotify('workbench.action.quickOpen')<CR>")
+  vim.keymap.set("n", "H", "<Cmd>call VSCodeNotify('workbench.action.previousEditor')<CR>")
+  vim.keymap.set("n", "L", "<Cmd>call VSCodeNotify('workbench.action.nextEditor')<CR>")
+end
