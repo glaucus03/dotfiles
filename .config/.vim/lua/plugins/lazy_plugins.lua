@@ -178,22 +178,28 @@ return {
       'neovim/nvim-lspconfig',
     },
   },
+  { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
+  { "nvimtools/none-ls.nvim", lazy = true },
 
   -- dap
   {
-    'rcarriga/nvim-dap-ui',
+    "mfussenegger/nvim-dap",
+    config = function()
+      require("plugins.config.nvim-dap").setup()
+    end,
+    lazy = true,
     dependencies = {
-      'mfussenegger/nvim-dap',
+      "rcarriga/nvim-dap-ui",
     },
-    config = function()
-      require('plugins.config.nvim-dap')
-    end,
   },
+
+  -- Debugger user interface
   {
-    'mfussenegger/nvim-dap',
+    "rcarriga/nvim-dap-ui",
     config = function()
-      require('plugins.config.nvim-dap')
+      require("plugins.config.nvim-dap").setup_ui()
     end,
+    lazy = true,
   },
   -- cmp
   {
