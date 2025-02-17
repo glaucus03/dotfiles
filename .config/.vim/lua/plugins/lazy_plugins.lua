@@ -1,7 +1,10 @@
+local is_vscode = vim.g.vscode
+
 return {
   -- layout
   {
     'EdenEast/nightfox.nvim',
+    cond = not is_vscode,
     config = function()
       require('plugins.config.nightfox')
     end,
@@ -10,12 +13,14 @@ return {
   -- windows management
   {
     'simeji/winresizer',
+    cond = not is_vscode,
     init = function()
       require('plugins.config.winresizer')
     end,
   },
   {
     'nvim-tree/nvim-tree.lua',
+    cond = not is_vscode,
     dependencies = {
       'nvim-tree/nvim-web-devicons',
     },
@@ -31,6 +36,7 @@ return {
   },
   {
     'nvim-lualine/lualine.nvim',
+    cond = not is_vscode,
     dependencies = {
       'nvim-tree/nvim-web-devicons',
     },
@@ -40,6 +46,7 @@ return {
   },
   {
     'nvim-telescope/telescope.nvim',
+    cond = not is_vscode,
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
@@ -48,10 +55,12 @@ return {
   },
   {
     'nvim-telescope/telescope-fzf-native.nvim',
+    cond = not is_vscode,
     build = 'make',
   },
   {
     'nvim-telescope/telescope-file-browser.nvim',
+    cond = not is_vscode,
     dependencies = {
       'nvim-telescope/telescope.nvim',
       'nvim-lua/plenary.nvim',
@@ -62,6 +71,7 @@ return {
   },
   {
     "AckslD/nvim-neoclip.lua",
+    cond = not is_vscode,
     dependencies = {
       { 'nvim-telescope/telescope.nvim' },
       { 'ibhagwan/fzf-lua' },
@@ -89,6 +99,7 @@ return {
   -- session
   {
     'rmagatti/auto-session',
+    cond = not is_vscode,
     config = function()
       require('plugins.config.auto-session')
     end,
@@ -106,19 +117,23 @@ return {
   },
   {
     'sindrets/diffview.nvim',
+    cond = not is_vscode,
   },
   {
     'akinsho/toggleterm.nvim',
+    cond = not is_vscode,
     config = function()
       require('plugins.config.toggleterm')
     end,
   },
   {
     'APZelos/blamer.nvim',
+    cond = not is_vscode,
   },
   -- edit action
   {
     'numToStr/Comment.nvim',
+    cond = not is_vscode,
     config = function()
       require('plugins.config.comment')
     end,
@@ -132,6 +147,7 @@ return {
   -- edit viewing
   {
     'petertriho/nvim-scrollbar',
+    cond = not is_vscode,
     config = function()
       require('plugins.config.nvim-scrollbar')
     end,
@@ -170,6 +186,7 @@ return {
   -- lsp
   {
     'williamboman/mason.nvim',
+    cond = not is_vscode,
     config = function()
       require('plugins.config.mason')
     end,
@@ -181,6 +198,7 @@ return {
   { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
   {
     "jay-babu/mason-null-ls.nvim",
+    cond = not is_vscode,
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason.nvim",
@@ -241,6 +259,7 @@ return {
   -- dap
   {
     "mfussenegger/nvim-dap",
+    cond = not is_vscode,
     config = function()
       require("plugins.config.nvim-dap").setup()
     end,
@@ -253,6 +272,7 @@ return {
   -- Debugger user interface
   {
     "rcarriga/nvim-dap-ui",
+    cond = not is_vscode,
     config = function()
       require("plugins.config.nvim-dap").setup_ui()
     end,
@@ -261,6 +281,7 @@ return {
   -- cmp
   {
     'hrsh7th/nvim-cmp',
+    cond = not is_vscode,
     event = 'InsertEnter',
     config = function()
       require('plugins.config.nvim-cmp')
@@ -268,59 +289,73 @@ return {
   },
   {
     'hrsh7th/cmp-nvim-lsp',
+    cond = not is_vscode,
     event = 'InsertEnter',
   },
   {
     'hrsh7th/cmp-buffer',
+    cond = not is_vscode,
     event = 'InsertEnter',
   },
   {
     'hrsh7th/cmp-path',
+    cond = not is_vscode,
     event = 'InsertEnter',
   },
   {
     'hrsh7th/cmp-vsnip',
+    cond = not is_vscode,
     event = 'InsertEnter',
   },
   {
     'hrsh7th/cmp-cmdline',
+    cond = not is_vscode,
     event = 'ModeChanged',
   },
   {
     'hrsh7th/cmp-nvim-lsp-signature-help',
+    cond = not is_vscode,
     event = 'InsertEnter',
   },
   {
     'hrsh7th/cmp-nvim-lsp-document-symbol',
+    cond = not is_vscode,
     event = 'InsertEnter',
   },
   {
     'hrsh7th/cmp-calc',
+    cond = not is_vscode,
     event = 'InsertEnter',
   },
   {
     'hrsh7th/cmp-emoji',
+    cond = not is_vscode,
     event = 'InsertEnter',
   },
   {
     'onsails/lspkind.nvim',
+    cond = not is_vscode,
     event = 'InsertEnter',
   },
   {
     'hrsh7th/vim-vsnip',
+    cond = not is_vscode,
     event = 'InsertEnter',
   },
   {
     'hrsh7th/vim-vsnip-integ',
+    cond = not is_vscode,
     event = 'InsertEnter',
   },
   {
     'rafamadriz/friendly-snippets',
+    cond = not is_vscode,
     event = 'InsertEnter',
   },
   -- images
   {
     "michaelrommel/nvim-silicon",
+    cond = not is_vscode,
     lazy = true,
     cmd = "Silicon",
     main = "nvim-silicon",
@@ -339,6 +374,7 @@ return {
   -- dev
   {
     'akinsho/flutter-tools.nvim',
+    cond = not is_vscode,
     lazy = false,
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -350,6 +386,7 @@ return {
   },
   {
     'yetone/avante.nvim',
+    cond = not is_vscode,
     event = 'VeryLazy',
     lazy = false,
     version = false, -- Set this to '*' to always pull the latest release version, or set it to false to update to the latest code changes.
