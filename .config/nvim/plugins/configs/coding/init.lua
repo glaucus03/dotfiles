@@ -3,7 +3,7 @@ return {
   {
     'williamboman/mason.nvim',
     cond = not env.is_vscode(),
-    config = function() require('plugins.configs.coding.mason') end,
+    config = function() require('plugins.configs.coding.mason').setup() end,
     dependencies = {
       'williamboman/mason-lspconfig.nvim',
       'neovim/nvim-lspconfig',
@@ -23,7 +23,7 @@ return {
     'hrsh7th/nvim-cmp',
     cond = not env.is_vscode(),
     event = 'InsertEnter',
-    config = function() require('plugins.configs.coding.cmp') end,
+    config = function() require('plugins.configs.coding.cmp').setup() end,
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
@@ -40,7 +40,7 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     cond = not env.is_vscode(),
-    config = function() require('plugins.configs.coding.treesitter') end,
+    config = function() require('plugins.configs.coding.treesitter').setup() end,
     doc = "構文解析"
   },
   {

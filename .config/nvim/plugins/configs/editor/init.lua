@@ -3,25 +3,25 @@ return {
   {
     'numToStr/Comment.nvim',
     cond = not env.is_vscode(),
-    config = function() require('plugins.configs.editor.comment') end,
+    config = function() require('plugins.configs.editor.comment').setup() end,
     doc = "コメントアウト"
   },
   {
     'monaqa/dial.nvim',
-    config = function() require('plugins.configs.editor.dial') end,
+    config = function() require('plugins.configs.editor.dial').setup() end,
     doc = "数値やテキストのインクリメント"
   },
   {
     'andymass/vim-matchup',
     event = 'CursorMoved',
-    config = function() require('plugins.configs.editor.matchup') end,
+    config = function() require('plugins.configs.editor.matchup').setup() end,
     doc = "対応する括弧等のジャンプ"
   },
 
   -- ナビゲーション
   {
     'hadronized/hop.nvim',
-    config = function() require('plugins.configs.editor.hop') end,
+    config = function() require('plugins.configs.editor.hop').setup() end,
     doc = "クイックジャンプ"
   },
   {

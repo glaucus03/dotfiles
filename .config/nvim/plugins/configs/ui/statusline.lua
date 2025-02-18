@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+function M.setup()
   -- 選択範囲の情報を取得する関数
   local function selectionCount()
     local mode = vim.fn.mode()
@@ -140,3 +142,5 @@ return function()
     extensions = {},
   })
 end
+
+return M

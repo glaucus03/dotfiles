@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+function M.setup()
   local api = require('nvim-tree.api')
 
   -- キーマッピングの設定
@@ -160,3 +162,5 @@ return function()
     on_attach = on_attach,
   })
 end
+
+return M
