@@ -65,8 +65,8 @@ return {
           mode = { "n", "v" },
           { "<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>",      desc = "vim.lsp.buf.declaration()" },
           { "<leader>lR", "<cmd>lua vim.lsp.buf.rename()<CR>",           desc = "vim.lsp.buf.rename()" },
-          { "<leader>l[", "<cmd>lua vim.diagnostic.goto_previous()<CR>", desc = "vim.diagnostic.goto_previous()" },
-          { "<leader>l]", "<cmd>lua vim.diagnostic.goto_next()<CR>",     desc = "vim.diagnostic.goto_next()" },
+          { "<leader>l,", "<cmd>lua vim.diagnostic.goto_previous()<CR>", desc = "vim.diagnostic.goto_previous()" },
+          { "<leader>l.", "<cmd>lua vim.diagnostic.goto_next()<CR>",     desc = "vim.diagnostic.goto_next()" },
           { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>",      desc = "vim.lsp.buf.code_action()" },
           { "<leader>ld", "<cmd>lua vim.lsp.buf.definition()<CR>",       desc = "vim.lsp.buf.definition()" },
           { "<leader>lf", "<cmd>lua vim.lsp.buf.format()<CR>",           desc = "vim.lsp.buf.format()" },
@@ -77,13 +77,14 @@ return {
           { "<leader>lD", "<cmd>lua vim.lsp.buf.type_definition()<CR>",  desc = "vim.lsp.buf.type_definition()" },
         },
         {
-          { "<leader>lt",   group = "LSP: Troubles" },
+          { "<leader>lt",  group = "LSP: Troubles" },
           mode = { "n", "v" },
-          { "<leader>lto", "<cmd>lua vim.lsp.buf.declaration()<CR>",       desc = "Toggle Trouble" },
-          { "<leader>ltw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics" },
-          { "<leader>ltd", "Workspace Diagnostics",                        desc = "Document Diagnostics" },
-          { "<leader>ltq", "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix List" },
-          { "<leader>lll", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List" },
+          { "<leader>ltd", "<cmd>Trouble diagnostics toggle<CR>",                        desc = "Diagnostics (Trouble)" },
+          { "<leader>ltb", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",           desc = "Buffer Diagnostics (Trouble)" },
+          { "<leader>lts", "<cmd>Trouble symbols toggle focus=false<cr>",                desc = "Symbols (Trouble)" },
+          { "<leader>ltl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", desc = "LSP Definitions / references / ... (Trouble)" },
+          { "<leader>lti", "<cmd>Trouble loclist toggle<cr>",                            desc = "Location List (Trouble)" },
+          { "<leader>ltq", "<cmd>Trouble qflist toggle<cr>",                             desc = "Quickfix List (Trouble)" },
         },
       }
       )
@@ -158,4 +159,3 @@ return {
   },
 
 }
-
