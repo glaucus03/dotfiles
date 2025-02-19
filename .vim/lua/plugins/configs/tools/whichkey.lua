@@ -101,7 +101,7 @@ return {
         wk.add(
           {
             { "<leader>f",  group = "telescope" },
-            { "<leader>fF", "<cmd>Telescope file_browser<CR>",                                       desc = "file browser" },
+            { "<leader>fr", "<cmd>Telescope file_browser<CR>",                                       desc = "file browser" },
             { "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<CR>",                   desc = "find buffers" },
             { "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<CR>",                desc = "find files" },
             { "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<CR>",                 desc = "live grep" },
