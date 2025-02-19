@@ -20,6 +20,7 @@ local function setup_keymaps(bufnr)
 end
 
 local function get_jdtls_config()
+  local lombok_jar = vim.fn.expand('~/.local/share/nvim/mason/share/jdtls/lombok.jar')
   return {
     cmd = {
       'java',
@@ -32,6 +33,7 @@ local function get_jdtls_config()
       '--add-modules=ALL-SYSTEM',
       '--add-opens', 'java.base/java.util=ALL-UNNAMED',
       '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+      '-javaagent:' .. lombok_jar, -- Lombokのサポートを追加
       '-jar', vim.fn.expand('$MASON/share/jdtls/plugins/org.eclipse.equinox.launcher.jar'),
       '-configuration', vim.fn.expand('$MASON/share/jdtls/config_linux'),
       '-data', vim.fn.expand('~/.cache/jdtls-workspace/') .. vim.fn.getcwd():gsub("/", "_")
@@ -41,9 +43,36 @@ local function get_jdtls_config()
 
     settings = {
       java = {
+        configuration = {
+          updateBuildConfiguration = "interactive",
+          -- Lombokサポートの追加
+          runtimes = {
+            {
+              name = "JavaSE-21", -- 使用しているJavaバージョンに応じて変更
+              path = vim.fn.expand("$JAVA_HOME"),
+            }
+          }
+        },
+        -- Lombokの設定
+        jdt = {
+          ls = {
+            lombokSupport = true,
+          }
+        },
+        imports = {
+          gradle = {
+            enabled = true,
+          },
+          maven = {
+            enabled = true,
+          }
+        },
         signatureHelp = { enabled = true },
         contentProvider = { preferred = 'fernflower' },
         completion = {
+          enabled = true,
+          guessMethodArguments = true,
+          overwrite = true,
           favoriteStaticMembers = {
             "org.junit.Assert.*",
             "org.junit.Assume.*",
