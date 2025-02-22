@@ -142,6 +142,12 @@ return {
               ,
               desc = "Silicon save file"
             },
+            {
+              "<leader>sv",
+              "<cmd>PasteImage<cr>"
+              ,
+              desc = "Silicon save file"
+            },
           },
         })
 
