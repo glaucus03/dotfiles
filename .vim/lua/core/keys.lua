@@ -8,26 +8,26 @@ local function setup()
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 
--- ESC mappings
+  -- ESC mappings
   map('i', 'jj', '<esc>')
-  map('i', 'っj', '<esc>')  -- 日本語入力対応
-  
+  map('i', 'っj', '<esc>') -- 日本語入力対応
+
   -- 編集操作
   map('i', '<c-o>', '<left><c-o>')
-  
+
   -- ウィンドウ操作
   map('n', '<c-h>', '<cmd>wincmd h<cr>')
   map('n', '<c-j>', '<cmd>wincmd j<cr>')
   map('n', '<c-k>', '<cmd>wincmd k<cr>')
   map('n', '<c-l>', '<cmd>wincmd l<cr>')
-  
+
   -- コマンドライン
   map('n', ';', ':')
-  
+
   -- ターミナル操作
   map('t', '<c-q>', '<c-\\><c-n><cmd>quit<cr>')
   map('t', '<esc>', '<c-\\><c-n>')
-  
+
   -- パス関連
   map('n', '<c-p>', function()
     local path = vim.fn.expand('%:p')
@@ -35,12 +35,15 @@ local function setup()
     vim.fn.setreg('+', path)
     vim.notify('Copied: ' .. path)
   end)
-  
+
   -- ファイル操作
   map('n', '%', function()
     vim.cmd.source('%')
     vim.notify('Source % done.')
   end)
+
+  -- copy/paste
+  map('i', '<leader>v', '<C-r>+')
 
   -- バッファ操作
   map('n', '<S-l>', function() vim.cmd.bnext() end)
