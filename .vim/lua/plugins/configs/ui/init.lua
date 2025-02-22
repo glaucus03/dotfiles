@@ -10,4 +10,5 @@ return {
     -- config = function() require('plugins.configs.ui.colorizer').setup() end,
     doc = "カラーコードのハイライト"
   },
+  -- TODO: winresizer
 }

@@ -38,19 +38,19 @@ return {
         },
         icons = {
           ---@type trouble.Indent.symbols
-          indent = {
-            top           = "│ ",
-            middle        = "├╴",
-            last          = "└╴",
+          indent        = {
+            top         = "│ ",
+            middle      = "├╴",
+            last        = "└╴",
             -- last          = "-╴",
             -- last       = "╰╴", -- rounded
-            fold_open     = " ",
-            fold_closed   = " ",
-            ws            = "  ",
+            fold_open   = " ",
+            fold_closed = " ",
+            ws          = "  ",
           },
-          folder_closed   = " ",
-          folder_open     = " ",
-          kinds = {
+          folder_closed = " ",
+          folder_open   = " ",
+          kinds         = {
             Array         = " ",
             Boolean       = "󰨙 ",
             Class         = " ",
@@ -95,7 +95,7 @@ return {
       --   { desc = "Location List" })
 
       -- TelescopeとTroubleの統合
-      local trouble = require("trouble.providers.telescope")
+      local trouble = require("trouble.sources.telescope")
       local telescope = require("telescope")
       telescope.setup({
         defaults = {

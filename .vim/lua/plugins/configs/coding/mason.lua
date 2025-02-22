@@ -28,10 +28,7 @@ return {
           "gopls",
           "html",
           "jsonls",
-          "tsserver",
           "jdtls",
-          "java-debug-adapter",
-          "java-test",
           "pyright",
         },
         automatic_installation = true
@@ -42,21 +39,24 @@ return {
 
       require('mason-lspconfig').setup_handlers({
         function(server_name)
-          require('lspconfig')[server_name].setup({
-            capabilities = capabilities,
-            on_attach = function(client, bufnr)
-              -- キーマッピングなどのセットアップ
-              local opts = { noremap = true, silent = true, buffer = bufnr }
-              vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-              vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-              vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-              vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-              vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-              vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-              vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
-              vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-            end
-          })
+          -- jdtls launch from null-ls
+          if server_name ~= "jdtls" then
+            require('lspconfig')[server_name].setup({
+              capabilities = capabilities,
+              on_attach = function(client, bufnr)
+                -- キーマッピングなどのセットアップ
+                local opts = { noremap = true, silent = true, buffer = bufnr }
+                vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+                vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+                vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+                vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+                vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+                vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+                vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
+                vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+              end
+            })
+          end
         end
       })
     end,
