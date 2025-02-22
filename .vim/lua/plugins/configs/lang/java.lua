@@ -50,6 +50,19 @@ local function get_jdtls_config()
     "\n"
   ))
 
+  local root_dir = require('jdtls.setup').find_root({ '.git', 'mvnw', 'gradlew', 'pom.xml', 'build.gradle' })
+  -- デバッグ出力
+  if root_dir then
+    vim.notify("JDTLS root directory: " .. root_dir, vim.log.levels.INFO)
+  else
+    vim.notify("No root directory found! Markers searched: " .. vim.inspect(root_markers), vim.log.levels.WARN)
+    -- フォールバックとして現在のディレクトリを使用
+    root_dir = vim.fn.getcwd()
+  end
+
+  local workspace_dir = vim.fn.expand('~/.cache/jdtls-workspace/') .. vim.fn.fnamemodify(root_dir, ':p:h:t')
+
+
   return {
     cmd = {
       "java",
@@ -66,11 +79,9 @@ local function get_jdtls_config()
       "-javaagent:" .. lombok_path,
       "-jar", vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
       "-configuration", jdtls_path .. "/config_linux",
-      "-data", vim.fn.expand('~/.cache/jdtls-workspace/') .. vim.fn.getcwd():gsub("/", "_")
+      "-data", workspace_dir
     },
-
-    root_dir = require('jdtls.setup').find_root({ '.git', 'mvnw', 'gradlew', 'pom.xml', 'build.gradle' }),
-
+    root_dir = root_dir,
     settings = {
       java = {
         configuration = {
@@ -128,13 +139,44 @@ local function get_jdtls_config()
           },
           useBlocks = true,
         },
+        debug = {
+          settings = {
+            hotCodeReplace = "auto",
+            enableRunDebugCodeLens = true,
+            -- 単一メソッドのデバッグを強制
+            forceBuildBeforeLaunch = true,
+            useInstanceScope = true,
+            showQualifiedNames = true,
+            showStaticVariables = true,
+            -- テスト実行時の設定
+            enableTestFilter = true,
+            filterStackTraces = true
+          }
+        }
       },
     },
 
     init_options = {
       bundles = bundles,
-      extendedClientCapabilities = require('jdtls').extendedClientCapabilities,
+      extendedClientCapabilities = {
+        resolveAdditionalTextEditsSupport = true,
+        -- デバッグ機能の詳細設定
+        classFileContentsSupport = true,
+        generateToStringPromptSupport = true,
+        hashCodeEqualsPromptSupport = true,
+        advancedExtractRefactoringSupport = true,
+        advancedOrganizeImportsSupport = true,
+        executeClientCommandSupport = true,
+        progressReportSupport = true,
+        -- テストに関する拡張設定
+        testSupport = true,
+        shouldLanguageServerExitOnShutdown = true,
+      }
     },
+    -- init_options = {
+    --   bundles = bundles,
+    --   extendedClientCapabilities = require('jdtls').extendedClientCapabilities,
+    -- },
   }
 end
 
@@ -147,18 +189,7 @@ return {
       'williamboman/mason.nvim',
     },
     ft = "java",
-  },
-  {
-    'elmcgill/springboot-nvim',
-    cond = not env.is_vscode(),
-    ft = "java",
-    dependencies = {
-      'neovim/nvim-lspconfig',
-      'mfussenegger/nvim-jdtls',
-    },
     config = function()
-      require("springboot-nvim").setup({})
-
       -- JDTLSのセットアップ
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "java",
@@ -219,7 +250,7 @@ return {
   },
   {
     "mfussenegger/nvim-lint",
-    event = { "BufReadPre", "BufNewFile"},
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       -- require('lint').linters_by_ft = {
       --   java = { 'checkstyle' },
@@ -233,5 +264,12 @@ return {
         end
       })
     end
+  },
+  {
+    "mfussenegger/nvim-dap",
+    config = function()
+      -- Simple configuration to attach to remote java debug process
+      -- Taken directly from https://github.com/mfussenegger/nvim-dap/wiki/Java
+    end,
   }
 }

@@ -96,18 +96,66 @@ return {
           { "<leader>er", "<cmd>NvimTreeRefresh<CR>",                 desc = "NvimTreeRefresh" },
         })
 
+        wk.add({
+          { "<leader>d",  group = "Debug" },
+          { "<leader>db", function() require('dap').toggle_breakpoint() end,             desc = "toggle breakpoint" },
+          { "<leader>dc", function() require('dap').continue() end,                      desc = "continue" },
+          { "<leader>do", function() require('dap').step_over() end,                     desc = "step over" },
+          { "<leader>di", function() require('dap').step_into() end,                     desc = "step into" },
+
+          { '<leader>du', require 'dapui'.toggle,                                        desc = 'Debug: Toggle UI' },
+          { '<leader>dh', function() require 'dap.ui.widgets'.hover() end,               desc = 'Debug: Hover' },
+          { '<leader>dp', function() require 'dap.ui.widgets'.preview() end,             desc = 'Debug: Preview' },
+          { '<leader>dh', function() require 'dap.ui.widgets'.hover() end,               desc = 'Debug: Hover' },
+
+          -- テスト関連の設定を追加
+          { "<leader>t",  group = "Test" },
+          { "<leader>tt", function() require("neotest").run.run() end,                   desc = "Run Nearest" },
+          { "<leader>tf", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run File" },
+          {
+            "<leader>td",
+            function()
+              local function debug_nearest_test()
+                require("neotest").run.run({
+                  strategy = "dap",
+                  -- Mavenテスト設定
+                  extra_args = {
+                    "-Dmaven.surefire.debug",
+                    "-DforkCount=0",
+                    "-DreuseForks=false"
+                  },
+                  -- テストスコープを明示的に指定
+                  scope = "nearest",
+                  -- DAP設定
+                  dap = {
+                    -- JUnitの単一テスト実行を強制
+                    justMyCode = false,
+                    testScope = "method",
+                    -- ホットリロードを有効化
+                    hotReload = "auto"
+                  }
+                })
+              end
+              debug_nearest_test()
+            end,
+            desc = "Debug Test"
+          },
+          { "<leader>ts", function() require("neotest").summary.toggle() end,              desc = "Toggle Summary" },
+          { "<leader>to", function() require("neotest").output.open({ enter = true }) end, desc = "Show Output" },
+        })
+
         wk.add(
           {
-            { "<leader>f",    group = "telescope" },
-            { "<leader>fr",   "<cmd>Telescope file_browser<CR>",                                       desc = "file browser" },
-            { "<leader>fb",   "<cmd>lua require('telescope.builtin').buffers()<CR>",                   desc = "find buffers" },
-            { "<leader>ff",   "<cmd>lua require('telescope.builtin').find_files()<CR>",                desc = "find files" },
-            { "<leader>fg",   "<cmd>lua require('telescope.builtin').live_grep()<CR>",                 desc = "live grep" },
-            { "<leader>fc",   "<cmd>lua require('telescope.builtin').commands()<CR>",                  desc = "show commands" },
-            { "<leader>fm",   "<cmd>lua require('telescope.builtin').marks()<CR>",                     desc = "show marks" },
-            { "<leader>fv",   "<cmd>lua require('telescope.builtin').registers()<CR>",                 desc = "show registers" },
-            { "<leader>fy",   "<cmd>lua require('neoclip.fzf')({'a', 'star', 'plus', 'unnmaed'})<CR>", desc = "yank" },
-            { mode = { "t" }, { "<c-q>", "<cmd>ToggleTermToggleAll<CR>", desc = "close toggle" } }
+            { "<leader>f",                   group = "telescope" },
+            { "<leader>fr",                  "<cmd>Telescope file_browser<CR>",                                       desc = "file browser" },
+            { "<leader>fb",                  "<cmd>lua require('telescope.builtin').buffers()<CR>",                   desc = "find buffers" },
+            { "<leader>ff",                  "<cmd>lua require('telescope.builtin').find_files()<CR>",                desc = "find files" },
+            { "<leader>fg",                  "<cmd>lua require('telescope.builtin').live_grep()<CR>",                 desc = "live grep" },
+            { "<leader>fc",                  "<cmd>lua require('telescope.builtin').commands()<CR>",                  desc = "show commands" },
+            { "<leader>fm",                  "<cmd>lua require('telescope.builtin').marks()<CR>",                     desc = "show marks" },
+            { "<leader>fv",                  "<cmd>lua require('telescope.builtin').registers()<CR>",                 desc = "show registers" },
+            { "<leader>fy",                  "<cmd>lua require('neoclip.fzf')({'a', 'star', 'plus', 'unnmaed'})<CR>", desc = "yank" },
+            { mode = { "n", "i", "v", "t" }, { "<c-q>", "<cmd>ToggleTermToggleAll<CR>", desc = "close toggle" } }
 
           }
         )
