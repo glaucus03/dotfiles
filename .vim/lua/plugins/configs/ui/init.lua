@@ -10,5 +10,9 @@ return {
     -- config = function() require('plugins.configs.ui.colorizer').setup() end,
     doc = "カラーコードのハイライト"
   },
-  -- TODO: winresizer
+  {
+    'simeji/winresizer',
+    -- config = function() require('plugins.configs.ui.colorizer').setup() end,
+    doc = "ウィンドウのリサイズ"
+  },
 }

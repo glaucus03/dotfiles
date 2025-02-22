@@ -38,7 +38,7 @@ return {
 
       -- LSPクライアント情報を取得する関数
       local function lsp_clients()
-        local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+        local clients = vim.lsp.get_clients({ bufnr = 0 })
         if #clients == 0 then
           return " no lspclients"
         end

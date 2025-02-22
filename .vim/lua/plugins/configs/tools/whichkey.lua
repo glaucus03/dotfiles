@@ -32,8 +32,6 @@ return {
       })
 
       -- leader keymap
-
-
       wk.add({
         { "<leader>c", group = "Convert Commands" },
         {
@@ -100,15 +98,15 @@ return {
 
         wk.add(
           {
-            { "<leader>f",  group = "telescope" },
-            { "<leader>fr", "<cmd>Telescope file_browser<CR>",                                       desc = "file browser" },
-            { "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<CR>",                   desc = "find buffers" },
-            { "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<CR>",                desc = "find files" },
-            { "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<CR>",                 desc = "live grep" },
-            { "<leader>fc", "<cmd>lua require('telescope.builtin').commands()<CR>",                  desc = "show commands" },
-            { "<leader>fm", "<cmd>lua require('telescope.builtin').marks()<CR>",                     desc = "show marks" },
-            { "<leader>fv", "<cmd>lua require('telescope.builtin').registers()<CR>",                 desc = "show registers" },
-            { "<leader>fy", "<cmd>lua require('neoclip.fzf')({'a', 'star', 'plus', 'unnmaed'})<CR>", desc = "yank" },
+            { "<leader>f",    group = "telescope" },
+            { "<leader>fr",   "<cmd>Telescope file_browser<CR>",                                       desc = "file browser" },
+            { "<leader>fb",   "<cmd>lua require('telescope.builtin').buffers()<CR>",                   desc = "find buffers" },
+            { "<leader>ff",   "<cmd>lua require('telescope.builtin').find_files()<CR>",                desc = "find files" },
+            { "<leader>fg",   "<cmd>lua require('telescope.builtin').live_grep()<CR>",                 desc = "live grep" },
+            { "<leader>fc",   "<cmd>lua require('telescope.builtin').commands()<CR>",                  desc = "show commands" },
+            { "<leader>fm",   "<cmd>lua require('telescope.builtin').marks()<CR>",                     desc = "show marks" },
+            { "<leader>fv",   "<cmd>lua require('telescope.builtin').registers()<CR>",                 desc = "show registers" },
+            { "<leader>fy",   "<cmd>lua require('neoclip.fzf')({'a', 'star', 'plus', 'unnmaed'})<CR>", desc = "yank" },
             { mode = { "t" }, { "<c-q>", "<cmd>ToggleTermToggleAll<CR>", desc = "close toggle" } }
 
           }
@@ -150,6 +148,17 @@ return {
         wk.add({
           { "<leader>m",  group = "Move Commands" },
           { "<leader>mh", "<cmd>HopWord<CR>",     desc = "HopWord" },
+        })
+        wk.add({
+          { "<leader>w", group = "Window" },
+          {
+            mode = { "n", },
+            {
+              "<leader>wt",
+              "<cmd>WinResizerStartResize<CR>",
+              desc = "window resize"
+            },
+          },
         })
       else
         vim.keymap.set("n", "<leader>fb", "<Cmd>call VSCodeNotify('workbench.action.quickOpen')<CR>")
