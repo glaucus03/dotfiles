@@ -115,28 +115,91 @@ return {
           {
             "<leader>td",
             function()
-              local function debug_nearest_test()
-                require("neotest").run.run({
-                  strategy = "dap",
-                  -- Mavenテスト設定
-                  extra_args = {
-                    "-Dmaven.surefire.debug",
-                    "-DforkCount=0",
-                    "-DreuseForks=false"
-                  },
-                  -- テストスコープを明示的に指定
-                  scope = "nearest",
-                  -- DAP設定
-                  dap = {
-                    -- JUnitの単一テスト実行を強制
-                    justMyCode = false,
-                    testScope = "method",
-                    -- ホットリロードを有効化
-                    hotReload = "auto"
-                  }
-                })
+              local neotest = require("neotest")
+
+              local ts_utils = require("nvim-treesitter.ts_utils")
+              local node = ts_utils.get_node_at_cursor()
+              local test_name = nil
+              local class_name = nil
+
+              while node do
+                local node_type = node:type()
+                if node_type == "function_definition" then
+                  local name_node = node:field("name")[1]
+                  if name_node then
+                    local name = vim.treesitter.get_node_text(name_node, 0)
+                    if string.match(name, "^test_") then
+                      test_name = name
+                      break
+                    end
+                  end
+                elseif node_type == "method_declaration" then
+                  -- メソッド名を取得
+                  local name_node = node:field("name")[1]
+                  if name_node then
+                    local method_text = vim.treesitter.get_node_text(node, 0)
+                    -- @Testアノテーションを含むかチェック
+                    if method_text:match("@Test") then
+                      test_name = vim.treesitter.get_node_text(name_node, 0)
+                      break
+                    end
+                  end
+                end
+
+                node = node:parent()
               end
-              debug_nearest_test()
+
+              if not test_name then
+                vim.notify("No test found near cursor", vim.log.levels.ERROR)
+                return nil
+              end
+
+              -- pytestの場合、-kオプションでテストを指定
+              position = { id = test_name }
+
+              if not position then
+                vim.notify("No test found near cursor", vim.log.levels.ERROR)
+                return nil
+              end
+              local function get_test_debug_config(filetype)
+                local configs = {
+                  java = {
+                    strategy = "dap",
+                    extra_args = {
+                      "-Dmaven.surefire.debug",
+                      "-DforkCount=0",
+                      "-DreuseForks=false"
+                    },
+                    scope = "nearest",
+                    dap = {
+                      justMyCode = false,
+                      testScope = "method",
+                      console = "integratedTerminal",
+                      hotReload = "auto"
+                    }
+                  },
+                  python = {
+                    position = position.id,
+                    strategy = "dap",
+                    scope = "nearest",
+                    extra_args = { "-k", position.id },
+                    dap = {
+                      justMyCode = false,
+                      console = "integratedTerminal"
+                    }
+                  }
+                }
+
+                return configs[filetype] or {
+                  strategy = "dap",
+                  scope = "nearest"
+                }
+              end
+              local filetype = vim.bo.filetype
+              local config = get_test_debug_config(filetype)
+              require("neotest").run.run(
+                config
+              )
             end,
             desc = "Debug Test"
           },

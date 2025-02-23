@@ -28,8 +28,10 @@ return {
           "gopls",
           "html",
           "jsonls",
-          "jdtls",
-          "pyright",
+          "jdtls", --java
+          "checkstyle", --java
+          "ruff", --python
+          "pyright", --python
         },
         automatic_installation = true
       })
