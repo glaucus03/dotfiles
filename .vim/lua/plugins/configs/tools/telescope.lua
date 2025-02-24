@@ -28,6 +28,13 @@ return {
         return finder.path
       end
 
+      local function get_file_name_first(_, path)
+        local tail = vim.fs.basename(path)
+        local parent = vim.fs.dirname(path)
+        if parent == "." then return tail end
+        return string.format("%s\t\t%s", tail, parent)
+      end
+
       telescope.setup({
         defaults = {
           file_ignore_patterns = {
@@ -61,6 +68,19 @@ return {
             hidden = true,     -- 隠しファイルを表示
             no_ignore = false, -- .gitignoreを尊重
             follow = true,     -- シンボリックリンクを追跡
+            path_display = get_file_name_first,     -- シンボリックリンクを追跡
+          },
+          live_grep = {
+            hidden = true,     -- 隠しファイルを表示
+            no_ignore = false, -- .gitignoreを尊重
+            follow = true,     -- シンボリックリンクを追跡
+            path_display = get_file_name_first,     -- シンボリックリンクを追跡
+          },
+          buffers = {
+            hidden = true,     -- 隠しファイルを表示
+            no_ignore = false, -- .gitignoreを尊重
+            follow = true,     -- シンボリックリンクを追跡
+            path_display = get_file_name_first,     -- シンボリックリンクを追跡
           },
         },
         extensions = {
