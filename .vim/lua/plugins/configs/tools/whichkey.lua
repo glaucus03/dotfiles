@@ -96,6 +96,13 @@ return {
           { "<leader>er", "<cmd>NvimTreeRefresh<CR>",                 desc = "NvimTreeRefresh" },
         })
 
+        local function open_in_new_tab(cmd)
+          vim.cmd("tabnew")
+          local win = vim.api.nvim_get_current_win()
+          local buf = vim.api.nvim_get_current_buf()
+          vim.cmd(cmd)
+          return { win = win, buf = buf }
+        end
         wk.add({
           { "<leader>d",  group = "Debug" },
           { "<leader>db", function() require('dap').toggle_breakpoint() end,             desc = "toggle breakpoint" },

@@ -28,10 +28,10 @@ return {
           "gopls",
           "html",
           "jsonls",
-          "jdtls", --java
+          "jdtls",      --java
           "checkstyle", --java
-          "ruff", --python
-          "pyright", --python
+          "ruff",       --python
+          "pyright",    --python
         },
         automatic_installation = true
       })
@@ -39,26 +39,58 @@ return {
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+      -- LSPサーバー固有の設定
+      --
+      local server_settings = {
+        pyright = {
+          settings = {
+            python = {
+              extraPaths = { "." },
+              venvPaths = '.',
+              pythonPath = "./.venv/bin/python",
+              analysis = {
+                typeCheckingMode = "basic",
+                reportOptionalSubscript = "none",
+                reportAttributeAccessIssue = "none",
+                reportOptionalMemberAccess = false,
+                reportReturnType = "none",
+                reportGeneralTypeIssues = "none",
+                reportMissingImports = "none",    -- importエラーの抑制
+                reportUnknownMemberType = "none", -- メンバーの型エラーの抑制
+                useLibraryCodeForTypes = true,
+                autoSearchPaths = true,
+              }
+            }
+          }
+        }
+      }
+
+      -- デフォルトのLSP設定を生成する関数
+      local function make_default_config()
+        return {
+          capabilities = capabilities
+        }
+      end
+
+      -- 除外するLSPサーバーのリスト
+      local excluded_servers = {
+        ["jdtls"] = true, -- null-lsから起動するため除外
+      }
+
       require('mason-lspconfig').setup_handlers({
         function(server_name)
-          -- jdtls launch from null-ls
-          if server_name ~= "jdtls" then
-            require('lspconfig')[server_name].setup({
-              capabilities = capabilities,
-              on_attach = function(client, bufnr)
-                -- キーマッピングなどのセットアップ
-                local opts = { noremap = true, silent = true, buffer = bufnr }
-                vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-                vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-                vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-                vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-                vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-                vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-                vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
-                vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-              end
-            })
+          if excluded_servers[server_name] then
+            return
           end
+          local config = vim.tbl_deep_extend(
+            "force",
+            make_default_config(),
+            server_settings[server_name] or {}
+          )
+          -- jdtls launch from null-ls
+          require('lspconfig')[server_name].setup(
+            config
+          )
         end
       })
     end,
