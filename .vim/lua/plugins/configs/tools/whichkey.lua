@@ -61,7 +61,14 @@ return {
         { "<leader>l", group = "LSP" },
         {
           mode = { "n", "v" },
-          { "<leader>lR", "<cmd>lua vim.lsp.buf.rename()<CR>",                           desc = "vim.lsp.buf.rename()" },
+          {
+            "<leader>lR",
+            function()
+              vim.lsp.buf.rename()
+              vim.cmd('silent! wa')
+            end,
+            desc = "vim.lsp.buf.rename()"
+          },
           { "<leader>l,", "<cmd>lua vim.diagnostic.goto_previous()<CR>",                 desc = "vim.diagnostic.goto_previous()" },
           { "<leader>l.", "<cmd>lua vim.diagnostic.goto_next()<CR>",                     desc = "vim.diagnostic.goto_next()" },
           { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>",                      desc = "vim.lsp.buf.code_action()" },
