@@ -50,8 +50,14 @@ local function setup()
   map('n', '<S-h>', function() vim.cmd.bprevious() end)
 
   -- インデント時の選択維持
-  map('v', '<', function() vim.cmd.normal('gv<') end)
-  map('v', '>', function() vim.cmd.normal('gv>') end)
+  map('v', '<', function()
+    vim.cmd('normal! <')
+    vim.cmd('normal! gv')
+  end)
+  map('v', '>', function() 
+    vim.cmd('normal! >')
+    vim.cmd('normal! gv')
+  end)
 
   -- 行移動
   map('v', 'J', function()

@@ -23,6 +23,14 @@ function M.setup()
     vim.cmd([[%s/\r//ge]])
   end, {})
 
+  vim.api.nvim_create_user_command('CmCamelCaseToSnakeCase', function(opts)
+    vim.cmd([['<,'>s/\([a-z0-9]\)\([A-Z]\)/\1_\l\2/g]])
+  end, {})
+
+  vim.api.nvim_create_user_command('CmSnakeCaseToCamelCase', function(opts)
+    vim.cmd([['<,'>s/_\([a-z]\)/\u\1/g]])
+  end, {})
+
   vim.api.nvim_create_user_command('CloseBuffers', function()
     local current_buf = vim.api.nvim_get_current_buf()
     local buffers_to_keep = {}
