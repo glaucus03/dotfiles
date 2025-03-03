@@ -2,7 +2,17 @@
 local function init_base()
   vim.opt.fileencoding = 'utf-8'
   vim.g.mapleader = " "
-  vim.g.maplocalleader = " "
+  -- vim.g.maplocalleader = " "
+  -- タイムアウト設定を大幅に調整
+  vim.opt.timeout = true
+  vim.opt.timeoutlen = 500 -- キーマッピングのタイムアウト時間
+  vim.opt.ttimeoutlen = 0  -- キーコードのタイムアウト時間をゼロに
+
+  -- インサートモードでのキー入力処理を高速化
+  vim.opt.updatetime = 300 -- スワップファイル書き込みとCursorHoldイベント発火の時間
+
+  -- インサートモードでのマッピングに遅延がないことを確認
+  vim.keymap.set('i', ' ', ' ', { noremap = true, silent = true })
 
   local vars = {
     python_host_prog = '/usr/bin/python2',
