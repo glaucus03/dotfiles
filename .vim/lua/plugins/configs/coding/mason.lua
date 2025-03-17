@@ -28,10 +28,12 @@ return {
           "gopls",
           "html",
           "jsonls",
-          "jdtls",      --java
-          "checkstyle", --java
-          "ruff",       --python
-          "pyright",    --python
+          "jdtls",         --java
+          "checkstyle",    --java
+          "ruff",          --python
+          "pyright",       --python
+          "erb-formatter", --ruby
+          "erb-lint",      --ruby
         },
         automatic_installation = true
       })
@@ -62,7 +64,16 @@ return {
               }
             }
           }
-        }
+        },
+        ruby_lsp = {
+          enabled = true,
+        },
+        rubocop = {
+          -- If Solargraph and Rubocop are both enabled as an LSP,
+          -- diagnostics will be duplicated because Solargraph
+          -- already calls Rubocop if it is installed
+          enabled = true,
+        },
       }
 
       -- デフォルトのLSP設定を生成する関数
