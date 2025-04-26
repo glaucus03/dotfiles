@@ -1,5 +1,9 @@
 local wezterm = require 'wezterm';
-
+local opacity_toggle = {
+  is_transparent = true,
+  transparent = 0.6,
+  opaque = 1.0,
+}
 return {
   default_prog = { "/bin/bash", "-l" },
   font = wezterm.font("Cica"),
@@ -113,10 +117,17 @@ return {
       key = 'g',
       mods = 'CTRL|SHIFT',
       action = wezterm.action_callback(function(window, pane)
-        local word = window:get_selection_escapes_for_pane(pane)
-        local search_text, idx = string.gsub(word, ' ', '+')
-        window:copy_to_clipboard(word)
-        os.execute("open https://google.com/search?q=" .. search_text)
+        local overrides = window:get_config_overrides() or {}
+        if opacity_toggle.is_transparent then
+          -- Switch to opaque
+          overrides.window_background_opacity = opacity_toggle.opaque
+          opacity_toggle.is_transparent = false
+        else
+          -- Switch to transparent
+          overrides.window_background_opacity = opacity_toggle.transparent
+          opacity_toggle.is_transparent = true
+        end
+        window:set_config_overrides(overrides)
       end)
     }
   },
