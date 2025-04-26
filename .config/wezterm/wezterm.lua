@@ -24,9 +24,9 @@ return {
   mouse_bindings = {
     -- 右クリックでクリップボードから貼り付け
     {
-        event = { Down = { streak = 1, button = 'Right' } },
-        mods = 'NONE',
-        action = wezterm.action.PasteFrom 'Clipboard',
+      event = { Down = { streak = 1, button = 'Right' } },
+      mods = 'NONE',
+      action = wezterm.action.PasteFrom 'Clipboard',
     },
   },
   -- keymap
@@ -72,6 +72,11 @@ return {
       action = wezterm.action.PaneSelect {
         mode = 'Activate'
       }
+    },
+    {
+      key = 'v',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.PasteFrom("Clipboard")
     },
     {
       key = '<',
