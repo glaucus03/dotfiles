@@ -1,4 +1,24 @@
 local M = {}
+-- カバレッジ関連のキーマップとコマンド追加
+local function setup_jacoco_keymaps(bufnr)
+  local function buf_map(mode, lhs, rhs, desc)
+    vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
+  end
+
+  -- JaCoCoカバレッジ関連のキーマップ
+  buf_map('n', '<leader>Jj', function() require('jacoco').run() end, "[J]ava [J]aCoCoレポート生成")
+  buf_map('n', '<leader>JJ', function() require('jacoco').show() end, "[J]ava [J]aCoCoレポート表示")
+
+  -- カバレッジ結果をハイライト表示するコマンド
+  vim.api.nvim_create_user_command('JaCoCoShow', function()
+    require('jacoco').show()
+  end, { desc = 'Show JaCoCo coverage' })
+
+  -- カバレッジレポートを生成するコマンド
+  vim.api.nvim_create_user_command('JaCoCoRun', function()
+    require('jacoco').run()
+  end, { desc = 'Run tests with JaCoCo' })
+end
 
 local function setup_keymaps(bufnr)
   local function buf_map(mode, lhs, rhs, desc)
@@ -19,6 +39,15 @@ local function setup_keymaps(bufnr)
   buf_map('n', '<leader>Jc', function() require("springboot-nvim").generate_class() end, "[J]ava Create [C]lass")
   buf_map('n', '<leader>Ji', function() require("springboot-nvim").generate_interface() end, "[J]ava Create [I]nterface")
   buf_map('n', '<leader>Je', function() require("springboot-nvim").generate_enum() end, "[J]ava Create [E]num")
+
+  buf_map('n', '<leader>Jj', function() require('jacoco').run() end, "[J]ava [J]aCoCoレポート生成")
+  buf_map('n', '<leader>JJ', function() require('jacoco').show() end, "[J]ava [J]aCoCoレポート表示")
+  buf_map('n', '<leader>JC', function() require('jacoco').clear() end, "[J]ava [C]lear JaCoCo display")
+  buf_map('n', '<leader>Jo', function() require('jacoco').open_html_report() end, "[J]ava [O]pen HTML report")
+  buf_map('n', '<leader>Jt', function() require('jacoco').toggle() end, "[J]ava [T]oggle JaCoCo on/off")
+  buf_map('n', '<leader>Jm', function() require('jacoco').toggle_display_method() end, "[J]ava Toggle display [M]ethod")
+  buf_map('n', '<leader>Js', function() require('jacoco').show_summary() end, "[J]ava [S]how coverage summary")
+  buf_map('n', '<leader>Jp', function() require('jacoco').show_coverage_popup() end, "[J]ava Show coverage [P]opup")
 end
 
 local function get_jdtls_config()
@@ -200,6 +229,14 @@ return {
             require('jdtls').setup_dap({ hotcodereplace = 'auto' })
             require('jdtls.dap').setup_dap_main_class_configs()
             require('jdtls.setup').add_commands()
+
+            vim.api.nvim_buf_create_user_command(bufnr, 'JaCoCoShow', function()
+              require('jacoco').show()
+            end, { desc = 'Show JaCoCo coverage' })
+
+            vim.api.nvim_buf_create_user_command(bufnr, 'JaCoCoRun', function()
+              require('jacoco').run()
+            end, { desc = 'Run tests with JaCoCo' })
           end
           require('jdtls').start_or_attach(config)
         end
@@ -269,7 +306,42 @@ return {
     "mfussenegger/nvim-dap",
     config = function()
       -- Simple configuration to attach to remote java debug process
-      -- Taken directly from https://github.com/mfussenegger/nvim-dap/wiki/Java
+      --
+      require("jacoco").setup({
+        -- JaCoCoの設定
+        report_paths = {
+          -- レポートパスの指定（プロジェクトによって異なる場合があります）
+          -- Mavenプロジェクトの場合
+          "target/site/jacoco/jacoco.xml",
+          -- Gradleプロジェクトの場合
+          "build/reports/jacoco/test/jacocoTestReport.xml",
+        },
+        display_method = "inline", -- 行番号の色を変更する方法
+        -- カバレッジデータを表示するための設定
+        signs = {
+          covered = { text = "✓", texthl = "JacocoCovered" },
+          missed = { text = "✘", texthl = "JacocoMissed" },
+          partial = { text = "◑", texthl = "JacocoPartial" },
+        },
+
+        -- カスタムコマンド
+        -- Mavenプロジェクトの場合のコマンド
+        maven_command = "mvn test jacoco:report",
+        -- Gradleプロジェクトの場合のコマンド
+        gradle_command = "./gradlew test jacocoTestReport",
+
+        -- プロジェクトタイプの自動検出（pom.xmlかbuild.gradleのどちらがあるか）
+        auto_detect_project_type = true,
+      })
+
+      vim.api.nvim_set_hl(0, "JacocoCovered", { fg = "#00FF00" }) -- カバー済み: 緑色
+      vim.api.nvim_set_hl(0, "JacocoMissed", { fg = "#FF0000" })  -- 未カバー: 赤色
+      vim.api.nvim_set_hl(0, "JacocoPartial", { fg = "#FFFF00" }) -- 部分カバー: 黄色
+
+      -- カバレッジハイライトの色設定
+      vim.api.nvim_set_hl(0, "JacocoCoveredLine", { fg = "#00FF00", bold = true })
+      vim.api.nvim_set_hl(0, "JacocoMissedLine", { fg = "#FF0000", bold = true })
+      vim.api.nvim_set_hl(0, "JacocoPartialLine", { fg = "#FFFF00", bold = true })
     end,
   }
 }

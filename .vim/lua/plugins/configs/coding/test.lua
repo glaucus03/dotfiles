@@ -13,35 +13,35 @@ return {
         -- neotest設定
         require("neotest").setup({
           adapters = {
-            -- require("neotest-java")({
-            --   -- アダプタ固有の設定
-            --   dap = {
-            --     config = {
-            --       name = "Debug Java Test",
-            --       type = "java",
-            --       request = "launch",
-            --       -- JUnitプラットフォームを指定
-            --       mainClass = "org.junit.platform.console.ConsoleLauncher",
-            --       -- プロジェクトパスの設定
-            --       projectName = "java-demo",
-            --       -- クラスパスの設定
-            --       classPaths = { "${workspaceFolder}/target/test-classes", "${workspaceFolder}/target/classes" },
-            --       -- メソッド単位でのテスト実行を強制
-            --       args = {
-            --         "--select-method",
-            --         "${testClass}#${testMethod}",
-            --         "--disable-banner",
-            --         "-quiet"
-            --       },
-            --       -- ソースパスの設定
-            --       sourcePaths = { "${workspaceFolder}/src/test/java" },
-            --       -- ホットリロードの設定
-            --       hotcodereplace = "auto",
-            --       -- テストスコープの設定
-            --       testScope = "method"
-            --     }
-            --   }
-            -- })
+            require("neotest-java")({
+              -- アダプタ固有の設定
+              dap = {
+                config = {
+                  name = "Debug Java Test",
+                  type = "java",
+                  request = "launch",
+                  -- JUnitプラットフォームを指定
+                  mainClass = "org.junit.platform.console.ConsoleLauncher",
+                  -- プロジェクトパスの設定
+                  projectName = "java-demo",
+                  -- クラスパスの設定
+                  classPaths = { "${workspaceFolder}/target/test-classes", "${workspaceFolder}/target/classes" },
+                  -- メソッド単位でのテスト実行を強制
+                  args = {
+                    "--select-method",
+                    "${testClass}#${testMethod}",
+                    "--disable-banner",
+                    "-quiet"
+                  },
+                  -- ソースパスの設定
+                  sourcePaths = { "${workspaceFolder}/src/test/java" },
+                  -- ホットリロードの設定
+                  hotcodereplace = "auto",
+                  -- テストスコープの設定
+                  testScope = "method"
+                }
+              }
+            })
           },
           -- UIレイアウトの設定
           summary = {
