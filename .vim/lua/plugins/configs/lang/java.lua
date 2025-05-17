@@ -5,9 +5,6 @@ local function setup_jacoco_keymaps(bufnr)
     vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
   end
 
-  -- JaCoCoカバレッジ関連のキーマップ
-  buf_map('n', '<leader>Jj', function() require('jacoco').run() end, "[J]ava [J]aCoCoレポート生成")
-  buf_map('n', '<leader>JJ', function() require('jacoco').show() end, "[J]ava [J]aCoCoレポート表示")
 
   -- カバレッジ結果をハイライト表示するコマンド
   vim.api.nvim_create_user_command('JaCoCoShow', function()
@@ -35,11 +32,6 @@ local function setup_keymaps(bufnr)
   buf_map('n', '<leader>JT', function() require('jdtls').test_class() end, "[J]ava [T]est Class")
 
   -- Spring Boot関連のキーマップ
-  buf_map('n', '<leader>Jr', function() require("springboot-nvim").boot_run() end, "[J]ava [R]un Spring Boot")
-  buf_map('n', '<leader>Jc', function() require("springboot-nvim").generate_class() end, "[J]ava Create [C]lass")
-  buf_map('n', '<leader>Ji', function() require("springboot-nvim").generate_interface() end, "[J]ava Create [I]nterface")
-  buf_map('n', '<leader>Je', function() require("springboot-nvim").generate_enum() end, "[J]ava Create [E]num")
-
   buf_map('n', '<leader>Jj', function() require('jacoco').run() end, "[J]ava [J]aCoCoレポート生成")
   buf_map('n', '<leader>JJ', function() require('jacoco').show() end, "[J]ava [J]aCoCoレポート表示")
   buf_map('n', '<leader>JC', function() require('jacoco').clear() end, "[J]ava [C]lear JaCoCo display")
@@ -48,6 +40,30 @@ local function setup_keymaps(bufnr)
   buf_map('n', '<leader>Jm', function() require('jacoco').toggle_display_method() end, "[J]ava Toggle display [M]ethod")
   buf_map('n', '<leader>Js', function() require('jacoco').show_summary() end, "[J]ava [S]how coverage summary")
   buf_map('n', '<leader>Jp', function() require('jacoco').show_coverage_popup() end, "[J]ava Show coverage [P]opup")
+
+  -- Spring Boot関連のデバッグキーマップを追加
+  buf_map('n', '<leader>Jsd', function() vim.cmd('SpringBootDebug') end, "[J]ava [S]pring Boot [D]ebug")
+  buf_map('n', '<leader>Jsr', function() vim.cmd('SpringBootRun') end, "[J]ava [S]pring Boot [R]un")
+  buf_map('n', '<leader>Jss', function() vim.cmd('SpringBootDebugStart') end, "[J]ava [S]pring Boot Debug [S]tart")
+
+  -- デバッグ操作キーマップ
+  buf_map('n', '<leader>Jb', function() require('dap').toggle_breakpoint() end, "[J]ava Toggle [B]reakpoint")
+  buf_map('n', '<leader>Jdb', function()
+    vim.ui.input({ prompt = "Condition: " }, function(condition)
+      if condition then
+        require('dap').set_breakpoint(condition)
+      end
+    end)
+  end, "[J]ava Set Con[d]itional [B]reakpoint")
+  buf_map('n', '<leader>Jc', function() require('dap').continue() end, "[J]ava Debug [C]ontinue")
+  buf_map('n', '<leader>Ji', function() require('dap').step_into() end, "[J]ava Step [I]nto")
+  buf_map('n', '<leader>Jo', function() require('dap').step_over() end, "[J]ava Step [O]ver")
+  buf_map('n', '<leader>Jou', function() require('dap').step_out() end, "[J]ava Step [O]ut")
+  buf_map('n', '<leader>Jre', function() require('dap').repl.open() end, "[J]ava Open [Re]pl")
+  buf_map('n', '<leader>Jq', function() require('dap').terminate() end, "[J]ava De[b]ug [Q]uit")
+
+  -- UI関連
+  buf_map('n', '<leader>Jdu', function() require('dapui').toggle() end, "[J]ava [D]AP [U]I toggle")
 end
 
 local function get_jdtls_config()
@@ -127,6 +143,7 @@ local function get_jdtls_config()
         },
         maven = {
           downloadSources = true,
+          updateSnapshots = true,
         },
         implementationsCodeLens = {
           enabled = true,
@@ -167,6 +184,7 @@ local function get_jdtls_config()
             template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}"
           },
           useBlocks = true,
+
         },
         debug = {
           settings = {
@@ -179,9 +197,18 @@ local function get_jdtls_config()
             showStaticVariables = true,
             -- テスト実行時の設定
             enableTestFilter = true,
-            filterStackTraces = true
+            filterStackTraces = true,
+            springBoot = {
+              enableLiveBeanSupport = true,
+              enableAutomaticRestart = true,
+              enableJmxRetrying = true,
+            }
           }
-        }
+        },
+        codeAction = {
+          enableMavenSourceAction = true,
+          enableGradleSourceAction = true,
+        },
       },
     },
 
@@ -237,6 +264,39 @@ return {
             vim.api.nvim_buf_create_user_command(bufnr, 'JaCoCoRun', function()
               require('jacoco').run()
             end, { desc = 'Run tests with JaCoCo' })
+
+            -- Spring Boot関連のコマンドを登録
+            vim.api.nvim_buf_create_user_command(bufnr, 'SpringBootRun', function()
+              local is_maven = vim.fn.filereadable(vim.fn.getcwd() .. '/pom.xml') == 1
+              local cmd = is_maven
+                  and 'mvn spring-boot:run -Dspring.profiles.active=local'
+                  or './gradlew bootRun --args="--spring.profiles.active=local"'
+
+              vim.cmd('tabnew | terminal ' .. cmd)
+              vim.cmd('startinsert')
+            end, { desc = 'Run Spring Boot Application' })
+
+            vim.api.nvim_buf_create_user_command(bufnr, 'SpringBootDebug', function()
+              local is_maven = vim.fn.filereadable(vim.fn.getcwd() .. '/pom.xml') == 1
+              local debug_args =
+              '-Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"'
+              local cmd = is_maven
+                  and 'mvn spring-boot:run ' .. debug_args
+                  or './gradlew bootRun --debug-jvm'
+
+              vim.cmd('tabnew | terminal ' .. cmd)
+              vim.cmd('startinsert')
+
+              vim.defer_fn(function()
+                require('dap').run({
+                  type = 'java',
+                  request = 'attach',
+                  name = 'Attach to Spring Boot',
+                  hostName = 'localhost',
+                  port = 5005,
+                })
+              end, 2000)
+            end, { desc = 'Debug Spring Boot Application' })
           end
           require('jdtls').start_or_attach(config)
         end
