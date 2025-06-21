@@ -16,6 +16,7 @@ return {
   audible_bell = "Disabled",
   disable_default_key_bindings = true,
   enable_tab_bar = true,
+  enable_kitty_keyboard = true,
   window_background_opacity = 0.6,
   -- defaultだとvimを開いたときなどに余白が生じる
   window_padding = {
@@ -129,6 +130,11 @@ return {
         end
         window:set_config_overrides(overrides)
       end)
+    },
+    {
+      key = 'Enter',
+      mods = 'SHIFT',
+      action = wezterm.action.SendString("\n")
     }
   },
   colors = {
