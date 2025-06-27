@@ -321,5 +321,26 @@
     "key": ";",
     "command": "workbench.action.showCommands",
     "when": "editorTextFocus && vim.mode == 'Normal' && !inQuickOpen"
+  },
+  
+  // 追加のキーバインディング（whichkey.lua対応）
+  // NvimTreeリフレッシュ（自動更新のため無効化）
+  // {
+  //   "key": "space e r",
+  //   "command": "workbench.files.action.refreshFilesExplorer",
+  //   "when": "editorTextFocus"
+  // },
+  
+  // LazyGit代替（ターミナルでlazygit起動）
+  {
+    "key": "space g g",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": { "text": "lazygit\n" },
+    "when": "terminalFocus"
+  },
+  {
+    "key": "space g g",
+    "command": "workbench.action.terminal.new",
+    "when": "!terminalFocus"
   }
 ]

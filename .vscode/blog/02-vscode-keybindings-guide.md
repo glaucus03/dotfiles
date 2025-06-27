@@ -196,11 +196,60 @@ VSCodeとVimのキーバインディングが競合する場合があります�
 
 他の拡張機能とキーバインディングが競合することがあります。VSCodeの設定画面で確認し、必要に応じて調整しましょう。
 
+## Neovim whichkey.lua との完全対応表
+
+実際のNeovim設定（whichkey.lua）とVSCodeキーバインディングの対応状況を詳細にまとめました。
+
+### 実装統計
+- ✅ **実装済み**: 29機能 (65.9%)
+- 🔴 **未対応**: 15機能 (34.1%)
+
+### 主要機能の対応状況
+
+| カテゴリ | Neovim | VSCode実装 | 状態 |
+|----------|--------|------------|------|
+| **LSP機能** | `<leader>l*` | 完全対応 | ✅ 100% |
+| **ファイル検索** | `<leader>f*` | ほぼ対応 | ✅ 85% |
+| **デバッグ** | `<leader>d*` | 完全対応 | ✅ 100% |
+| **テスト** | `<leader>t*` | 完全対応 | ✅ 100% |
+| **Git操作** | `<leader>g*` | 部分対応 | 🟡 75% |
+| **Trouble機能** | `<leader>lt*` | 部分対応 | 🟡 25% |
+
+### 未実装の主要機能
+
+1. **ヤンク履歴** (`<leader>fy`) - Clipboard Manager拡張機能で対応可能
+2. **Trouble系機能** (`<leader>lt*`) - Problems/Outline ビューで部分代替
+3. **画像操作** (`<leader>s*`) - 専用拡張機能が必要
+4. **グローバル数値操作** (`<leader>cg*`) - カスタム拡張機能で実装可能
+
+### 代替実装の推奨事項
+
+重要度の高い未実装機能については、以下の方法で対応できます：
+
+```json
+// ヤンク履歴（拡張機能：Clipboard Manager）
+{
+  "key": "space f y",
+  "command": "clipboard-manager.editor.pickAndPaste",
+  "when": "editorTextFocus"
+},
+
+// LazyGit代替
+{
+  "key": "space g g",
+  "command": "workbench.action.terminal.sendSequence",
+  "args": { "text": "lazygit\n" },
+  "when": "terminalFocus"
+}
+```
+
+詳細な対応表は[keybinding-mapping-analysis.md](../keybinding-mapping-analysis.md)を参照してください。
+
 ## まとめ
 
 詳細なキーバインディング設定により、VSCodeでもVimライクな操作感を実現できます。重要なのは、自分のワークフローに合わせて段階的に設定を追加していくことです。
 
-最初はエスケープキーやウィンドウ移動から始めて、徐々にLeaderキーやLSP機能のバインディングを追加していけば、ストレスなく移行できるでしょう。
+約66%の機能が完全に再現でき、残りの機能も拡張機能や代替手段で補完可能です。最初はエスケープキーやウィンドウ移動から始めて、徐々にLeaderキーやLSP機能のバインディングを追加していけば、ストレスなく移行できるでしょう。
 
 設定は個人の好みや作業スタイルによって大きく異なります。今回紹介した設定をベースに、あなたなりのカスタマイズを見つけてください。
 
