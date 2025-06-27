@@ -1,0 +1,98 @@
+{
+  "recommendations": [
+    // Vim エミュレーション（必須）
+    "vscodevim.vim",
+    
+    // テーマ（Neovimのnightfoxテーマに相当）
+    "zhuangtongfa.material-theme",
+    "PKief.material-icon-theme",
+    
+    // ファイル検索とナビゲーション（telescope.nvim相当）
+    "hbenl.vscode-test-explorer",
+    "eamodio.gitlens",
+    
+    // Git統合（lazygit相当）
+    "mhutchie.git-graph",
+    "donjayamanne.githistory",
+    
+    // 言語サポート
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-python.black-formatter",
+    "golang.go",
+    "redhat.java",
+    "vscjava.vscode-java-debug",
+    "vscjava.vscode-java-test",
+    "ms-vscode.cpptools",
+    "rust-lang.rust-analyzer",
+    "bradlc.vscode-tailwindcss",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    
+    // Markdown
+    "yzhang.markdown-all-in-one",
+    "bierner.markdown-mermaid",
+    
+    // Flutter/Dart
+    "Dart-Code.dart-code",
+    "Dart-Code.flutter",
+    
+    // デバッグ
+    "msjsdiag.debugger-for-chrome",
+    "firefox-devtools.vscode-firefox-debug",
+    
+    // テスト
+    "hbenl.vscode-test-explorer",
+    "littlefoxteam.vscode-python-test-adapter",
+    
+    // 移動とナビゲーション（hop.nvim相当）
+    "lucax88x.codeacejumper",
+    
+    // コメント（comment.nvim相当）
+    "aaron-bond.better-comments",
+    
+    // 括弧のペアリング（matchup相当）
+    "CoenraadS.bracket-pair-colorizer-2",
+    
+    // 自動セッション管理（auto-session相当）
+    "alefragnani.project-manager",
+    
+    // ターミナル統合（toggleterm相当）
+    "tyriar.terminal-tabs",
+    
+    // コード補完とLSP
+    "christian-kohler.path-intellisense",
+    "visualstudioexptteam.vscodeintellicode",
+    
+    // トラブルシューティング（trouble.nvim相当）
+    "usernamehw.errorlens",
+    
+    // ファイルツリー（nvim-tree相当）
+    "gruntfuggly.todo-tree",
+    
+    // その他の便利な拡張機能
+    "ritwickdey.LiveServer",
+    "formulahendry.code-runner",
+    "wayou.vscode-todo-highlight",
+    "oderwat.indent-rainbow",
+    "streetsidesoftware.code-spell-checker",
+    
+    // リモート開発
+    "ms-vscode-remote.remote-ssh",
+    "ms-vscode-remote.remote-containers",
+    "ms-vscode.remote-server",
+    
+    // Docker
+    "ms-azuretools.vscode-docker",
+    
+    // データベース
+    "mtxr.sqltools",
+    
+    // REST Client
+    "humao.rest-client",
+    
+    // AI補完（Neovimのai.lua相当）
+    "GitHub.copilot",
+    "GitHub.copilot-chat"
+  ]
+}

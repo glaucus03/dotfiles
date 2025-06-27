@@ -1,0 +1,74 @@
+{
+  "name": "telescope-vscode",
+  "displayName": "Telescope for VSCode",
+  "description": "Telescope.nvim-like fuzzy finder for VSCode",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onCommand:telescope.findFiles",
+    "onCommand:telescope.liveGrep",
+    "onCommand:telescope.findInCurrentDirectory"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "telescope.findFiles",
+        "title": "Telescope: Find Files"
+      },
+      {
+        "command": "telescope.liveGrep",
+        "title": "Telescope: Live Grep"
+      },
+      {
+        "command": "telescope.findInCurrentDirectory",
+        "title": "Telescope: Find in Current Directory"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "telescope.findFiles",
+        "key": "ctrl+shift+p f",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "telescope.liveGrep",
+        "key": "ctrl+shift+p g",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "Telescope",
+      "properties": {
+        "telescope.previewEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable file preview in picker"
+        },
+        "telescope.useRipgrep": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use ripgrep for searching"
+        },
+        "telescope.ignorePatterns": {
+          "type": "array",
+          "default": [".git", "node_modules", ".vscode"],
+          "description": "Patterns to ignore when searching"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "typescript": "^4.9.5"
+  }
+}

@@ -1,0 +1,325 @@
+[
+  // エスケープマッピング
+  {
+    "key": "j j",
+    "command": "extension.vim_escape",
+    "when": "editorTextFocus && vim.active && vim.mode == 'Insert'"
+  },
+  {
+    "key": "っ j", 
+    "command": "extension.vim_escape",
+    "when": "editorTextFocus && vim.active && vim.mode == 'Insert'"
+  },
+  
+  // ウィンドウ操作
+  {
+    "key": "ctrl+h",
+    "command": "workbench.action.focusLeftGroup",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.focusBelowGroup",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.focusAboveGroup",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "workbench.action.focusRightGroup",
+    "when": "editorTextFocus"
+  },
+  
+  // ターミナルでのウィンドウ操作
+  {
+    "key": "ctrl+h",
+    "command": "workbench.action.focusLeftGroup",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.focusBelowGroup",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.focusAboveGroup",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "workbench.action.focusRightGroup",
+    "when": "terminalFocus"
+  },
+  
+  // ターミナル操作
+  {
+    "key": "ctrl+q",
+    "command": "workbench.action.terminal.kill",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "escape",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "terminalFocus"
+  },
+  
+  // パス関連
+  {
+    "key": "ctrl+p",
+    "command": "copyRelativeFilePath",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+  
+  // バッファ（タブ）操作
+  {
+    "key": "shift+l",
+    "command": "workbench.action.nextEditor",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+  {
+    "key": "shift+h",
+    "command": "workbench.action.previousEditor",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+  
+  // ハイライト解除
+  {
+    "key": "escape",
+    "command": "closeFindWidget",
+    "when": "editorFocus && findWidgetVisible"
+  },
+  
+  // Leader キーマッピング
+  // LSP関連
+  {
+    "key": "space l shift+r",
+    "command": "editor.action.rename",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space l ,",
+    "command": "editor.action.marker.prev",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space l .",
+    "command": "editor.action.marker.next",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space l a",
+    "command": "editor.action.quickFix",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space l d",
+    "command": "editor.action.revealDefinition",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space l f",
+    "command": "editor.action.formatDocument",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space l i",
+    "command": "editor.action.goToImplementation",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space l k",
+    "command": "editor.action.showHover",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space l o",
+    "command": "editor.action.showHover",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space l r",
+    "command": "editor.action.goToReferences",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space l s",
+    "command": "editor.action.triggerParameterHints",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space l shift+d",
+    "command": "editor.action.goToTypeDefinition",
+    "when": "editorTextFocus"
+  },
+  
+  // Problems (Trouble equivalent)
+  {
+    "key": "space l t d",
+    "command": "workbench.actions.view.problems",
+    "when": "editorTextFocus"
+  },
+  
+  // エクスプローラー（NvimTree相当）
+  {
+    "key": "space e e",
+    "command": "workbench.view.explorer",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space e f",
+    "command": "revealInExplorer",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space e q",
+    "command": "workbench.action.toggleSidebarVisibility",
+    "when": "explorerViewletVisible"
+  },
+  
+  // Telescope相当のファイル検索
+  {
+    "key": "space f f",
+    "command": "workbench.action.quickOpen",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "space f g",
+    "command": "workbench.action.findInFiles",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "space f b",
+    "command": "workbench.action.showAllEditors",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "space f c",
+    "command": "workbench.action.showCommands",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "space f m",
+    "command": "workbench.action.showAllSymbols",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "space f r",
+    "command": "workbench.files.action.showActiveFileInExplorer",
+    "when": "!terminalFocus"
+  },
+  
+  // Git関連
+  {
+    "key": "space g g",
+    "command": "git.openChange",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space g s",
+    "command": "workbench.view.scm",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space g b",
+    "command": "gitlens.toggleFileBlame",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space g v o",
+    "command": "git.openChanges",
+    "when": "editorTextFocus"
+  },
+  
+  // デバッグ関連
+  {
+    "key": "space d b",
+    "command": "editor.debug.action.toggleBreakpoint",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space d c",
+    "command": "workbench.action.debug.continue",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space d o",
+    "command": "workbench.action.debug.stepOver",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space d i",
+    "command": "workbench.action.debug.stepInto",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space d u",
+    "command": "workbench.debug.action.toggleRepl",
+    "when": "editorTextFocus"
+  },
+  
+  // テスト関連
+  {
+    "key": "space t t",
+    "command": "testing.runAtCursor",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space t f",
+    "command": "testing.runCurrentFile", 
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space t d",
+    "command": "testing.debugAtCursor",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space t s",
+    "command": "workbench.view.testing.focus",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "space t o",
+    "command": "testing.showMostRecentOutput",
+    "when": "editorTextFocus"
+  },
+  
+  // ターミナルトグル
+  {
+    "key": "ctrl+q",
+    "command": "workbench.action.terminal.toggleTerminal",
+    "when": "!terminalFocus"
+  },
+  
+  // Move (Hop相当) - 拡張機能が必要
+  {
+    "key": "space m h",
+    "command": "extension.aceJump.multiChar",
+    "when": "editorTextFocus"
+  },
+  
+  // ウィンドウリサイズ
+  {
+    "key": "space w t",
+    "command": "workbench.action.toggleEditorWidths",
+    "when": "editorTextFocus"
+  },
+  
+  // Vimプラグイン用の追加設定
+  {
+    "key": "space v",
+    "command": "editor.action.clipboardPasteAction",
+    "when": "editorTextFocus && vim.mode == 'Insert'"
+  },
+  
+  // コマンドパレット用（Neovimの ; : マッピングに相当）
+  {
+    "key": ";",
+    "command": "workbench.action.showCommands",
+    "when": "editorTextFocus && vim.mode == 'Normal' && !inQuickOpen"
+  }
+]

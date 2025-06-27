@@ -1,0 +1,239 @@
+{
+  // エディタ基本設定
+  "editor.fontSize": 14,
+  "editor.fontFamily": "'JetBrains Mono', 'Fira Code', Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.lineHeight": 1.5,
+  
+  // 行番号とカーソル設定（Neovimのnumber, relativenumber, cursorline相当）
+  "editor.lineNumbers": "relative",
+  "editor.renderLineHighlight": "all",
+  "editor.cursorStyle": "line",
+  "editor.cursorBlinking": "solid",
+  
+  // インデント設定（Neovimのtabstop, shiftwidth, expandtab相当）
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.autoIndent": "full",
+  
+  // 検索設定（Neovimのignorecase, smartcase相当）
+  "search.smartCase": true,
+  "editor.find.addExtraSpaceOnTop": false,
+  
+  // ファイル設定
+  "files.encoding": "utf8",
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  
+  // 折りたたみ設定
+  "editor.folding": true,
+  "editor.foldingStrategy": "indentation",
+  
+  // 括弧のマッチング
+  "editor.matchBrackets": "always",
+  "editor.bracketPairColorization.enabled": true,
+  
+  // スクロール設定
+  "editor.scrollBeyondLastLine": true,
+  "editor.smoothScrolling": true,
+  
+  // ミニマップ
+  "editor.minimap.enabled": false,
+  
+  // ワードラップ
+  "editor.wordWrap": "off",
+  
+  // 分割設定（Neovimのsplitright, splitbelow相当）
+  "workbench.editor.openSideBySideDirection": "right",
+  
+  // ターミナル設定
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.fontFamily": "'JetBrains Mono', monospace",
+  "terminal.integrated.rightClickBehavior": "paste",
+  "terminal.integrated.scrollback": 10000,
+  
+  // Git設定
+  "scm.diffDecorations": "all",
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  
+  // ファイルエクスプローラー設定
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  
+  // Vim拡張機能設定
+  "vim.leader": "<space>",
+  "vim.useSystemClipboard": true,
+  "vim.hlsearch": true,
+  "vim.ignorecase": true,
+  "vim.smartcase": true,
+  "vim.incsearch": true,
+  "vim.useCtrlKeys": true,
+  "vim.highlightedyank.enable": true,
+  "vim.highlightedyank.duration": 200,
+  "vim.surround": true,
+  "vim.easymotion": true,
+  "vim.easymotionKeys": "hklyuiopnm,qwertzxcvbasdgjf",
+  
+  // Vim キーバインディング設定
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
+    },
+    {
+      "before": ["っ", "j"],
+      "after": ["<Esc>"]
+    },
+    {
+      "before": [";"],
+      "commands": ["workbench.action.showCommands"]
+    },
+    {
+      "before": ["J"],
+      "after": ["m", "z", "J", "`", "z"]
+    },
+    {
+      "before": ["n"],
+      "after": ["n", "z", "z", "z", "v"]
+    },
+    {
+      "before": ["N"],
+      "after": ["N", "z", "z", "z", "v"]
+    }
+  ],
+  
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
+    },
+    {
+      "before": ["っ", "j"],
+      "after": ["<Esc>"]
+    }
+  ],
+  
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<"],
+      "commands": ["editor.action.outdentLines"]
+    },
+    {
+      "before": [">"],
+      "commands": ["editor.action.indentLines"]
+    },
+    {
+      "before": ["J"],
+      "commands": ["editor.action.moveLinesDownAction"]
+    },
+    {
+      "before": ["K"],
+      "commands": ["editor.action.moveLinesUpAction"]
+    }
+  ],
+  
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false,
+    "<C-p>": false,
+    "<C-b>": false,
+    "<C-d>": true,
+    "<C-u>": true
+  },
+  
+  // 言語別設定
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[java]": {
+    "editor.formatOnSave": true
+  },
+  "[go]": {
+    "editor.formatOnSave": true
+  },
+  
+  // テーマ設定
+  "workbench.colorTheme": "One Dark Pro",
+  "workbench.iconTheme": "material-icon-theme",
+  
+  // UI設定
+  "workbench.activityBar.visible": true,
+  "workbench.sideBar.location": "left",
+  "workbench.statusBar.visible": true,
+  "workbench.tree.indent": 20,
+  "workbench.tree.renderIndentGuides": "always",
+  
+  // エディタの提案とヒント
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
+  "editor.parameterHints.enabled": true,
+  "editor.suggestSelection": "first",
+  
+  // フォーマッタ設定
+  "editor.formatOnSave": false,
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  
+  // ファイル除外設定
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/node_modules": true
+  },
+  
+  // 検索除外設定
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/.git": true
+  },
+  
+  // Telescope風の設定（Quick Openの動作をカスタマイズ）
+  "workbench.quickOpen.closeOnFocusLost": false,
+  "workbench.quickOpen.preserveInput": false,
+  
+  // ウィンドウ設定
+  "window.zoomLevel": 0,
+  "window.menuBarVisibility": "toggle",
+  
+  // 統合ターミナル
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.defaultProfile.windows": "powershell",
+  
+  // 拡張機能の推奨設定
+  "extensions.ignoreRecommendations": false,
+  
+  // パフォーマンス設定
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "**/.hg/store/**": true
+  }
+}
